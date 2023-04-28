@@ -21,7 +21,20 @@ namespace Grid
 
         private List<Face> faces;
 
-        private void Awake()
+        public void InstantiateRenderer(Material _material, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        {
+            material = _material;
+            innerSize = _innerSize;
+            outerSize = _outerSize;
+            height = _height;
+            isFlatTopped = _isFlatTopped;
+            CreateMesh();
+            
+            DrawMesh();
+            CombineFaces();
+        }
+
+        private void CreateMesh()
         {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
@@ -30,24 +43,26 @@ namespace Grid
             {
                 name = meshName
             };
-
+            
             meshFilter.mesh = mesh;
             meshRenderer.material = material;
         }
-
+        
+        private void Awake()
+        {
+            CreateMesh();
+        }
+        
         private void OnEnable()
         {
-            DrawFaces();
-            CombineFaces();
-        }
-
-        private void OnValidate()
-        {
-            DrawFaces();
+            meshFilter.mesh = mesh;
+            meshRenderer.material = material;
+            
+            DrawMesh();
             CombineFaces();
         }
         
-        private void DrawFaces()
+        private void DrawMesh()
         {
             faces = new List<Face>();
             
@@ -65,6 +80,8 @@ namespace Grid
                 // Inner faces
                 faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
             }
+            
+            Debug.Log(gameObject.name + " : " + faces.Count);
         }
         
         private void CombineFaces()
