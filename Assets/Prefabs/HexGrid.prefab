@@ -93,11 +93,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3991399502021653306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d31cc69485abbc44ea551a9d17fd2799, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d4a437b877fe5b48b8aa1bc7cbc64c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 877e2e125e71bf44380d0ad7698207ff, type: 2}
-  innerSize: 0
-  outerSize: 1
+  gridSize: {x: 5, y: 5}
+  material: {fileID: 2100000, guid: a1680c2b347e14f49bafccaf10f440d5, type: 2}
+  innerSize: 40
+  outerSize: 50
   height: 1
   isFlatTopped: 0
