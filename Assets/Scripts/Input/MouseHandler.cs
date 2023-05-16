@@ -8,21 +8,13 @@ using UnityEngine.InputSystem;
 
 public class MouseHandler : MonoBehaviour
 {
-    private InputAction _inputs;
     private UnityEngine.Camera mainCamera;
-    [SerializeField] private IHoverable currentHover;
+    private IHoverable currentHover;
 
     private void Awake()
     {
         mainCamera = UnityEngine.Camera.main;
     }
-
-    private void Start()
-    {
-        _inputs = new InputAction();
-        _inputs.Enable();
-    }
-
     private void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
@@ -32,23 +24,26 @@ public class MouseHandler : MonoBehaviour
             if (hit.collider)
             {
                 IHoverable tmp = hit.collider.GetComponent<IHoverable>();
-                if (currentHover == null && tmp != null)
+                if (tmp != null)
                 {
-                    currentHover = tmp;
-                    currentHover.OnHoverEnable();
+                    if (currentHover == null)
+                    {
+                        UpdateCurrentHover(tmp);
+                        EnableHover();
 
-                }
-                else if (currentHover != tmp && tmp != null)
-                {
-                    currentHover.OnHoverDisable();
-                    currentHover = tmp;
-                    currentHover.OnHoverEnable();
+                    }
+                    else if (currentHover != tmp)
+                    {
+                        DisableHover();
+                        UpdateCurrentHover(tmp);
+                        EnableHover();
+                    }
                 }
             }
-            else // TODO: Check if selected object is still selected by the player (by listening to an event ?)
+            else
             {
-                currentHover?.OnHoverDisable();
-                currentHover = null;
+                DisableHover();
+                UpdateCurrentHover(null);
             }
         }
     }
@@ -58,6 +53,21 @@ public class MouseHandler : MonoBehaviour
         {
             hover.OnSelectItem();
         }
+    }
+
+    private void UpdateCurrentHover(IHoverable newItem)
+    {
+        currentHover = newItem;
+    }
+
+    private void DisableHover()
+    {
+        currentHover?.OnHoverDisable();
+    }
+
+    private void EnableHover()
+    {
+        currentHover?.OnHoverEnable();
     }
     
 }

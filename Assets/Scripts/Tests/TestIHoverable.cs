@@ -31,4 +31,9 @@ public class TestIHoverable : MonoBehaviour, IHoverable, ISelectable
     {
         mr.material = selectMaterial;
     }
+
+    public void OnDeselectItem()
+    {
+        mr.material = defaultMaterial;
+    }
 }
