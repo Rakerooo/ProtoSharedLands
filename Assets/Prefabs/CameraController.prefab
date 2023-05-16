@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1396890012285198548}
   m_Layer: 0
-  m_Name: WeshMax
+  m_Name: WestMax
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7087257803048939013}
-  - component: {fileID: 4895447603571149985}
+  - component: {fileID: 5642378919837089247}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -422,7 +422,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4895447603571149985
+--- !u!114 &5642378919837089247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -431,25 +431,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 6892306271121742943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b71cef2b53bd024ab3dd2b422a39581, type: 3}
+  m_Script: {fileID: 11500000, guid: aef99e6f5d375014d96d10c0489c2d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 6988593937552071856}
   rig: {fileID: 4183004976574252872}
   normalSpeed: 1
   fastSpeed: 3
-  movementTime: 0.1
-  maxVelocity: 50000
+  movementTime: 5
+  maxVelocity: 500
   maxRange: 2500
   minRange: 250
-  rotationSpeed: 0.5
-  rotationTime: 15
-  zoomForce: 2
-  zoomTime: 1
-  scrollMultiplier: 15
+  rotationSpeed: 1
+  rotationTime: 5
+  zoomForce: 0.05
+  zoomTime: 5
+  scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
   end: {fileID: 4914040741525889396}
-  zoomAmount: 0.5
+  zoomAmount: 0.2
   maxNorth: {fileID: 6825774753183312592}
   maxSouth: {fileID: 119791398403895913}
   maxEast: {fileID: 294480591679976876}
