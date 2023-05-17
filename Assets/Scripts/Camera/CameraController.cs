@@ -26,10 +26,10 @@ namespace Camera
             
             private float movementSpeed => Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
             private Vector3 view => cam == null ? Vector3.zero : cam.ScreenToViewportPoint(Input.mousePosition) ;
-            private bool IsPanningLeft => view.x <= panningMarginLeft;
-            private bool IsPanningRight => view.x >= 1 - panningMarginRight;
-            private bool IsPanningTop => view.y >= 1 - panningMarginTop;
-            private bool IsPanningBottom => view.y <= panningMarginBottom;
+            private bool IsPanningLeft => view.x <= panningMarginLeft && view.x >= 0;
+            private bool IsPanningRight => view.x >= 1 - panningMarginRight && view.x <= 1;
+            private bool IsPanningTop => view.y >= 1 - panningMarginTop && view.y <= 1;
+            private bool IsPanningBottom => view.y <= panningMarginBottom && view.y >= 0;
         #endregion
         #region Rotation attributes
             [Header("Rotation attributes")] [Tooltip("QE")]
