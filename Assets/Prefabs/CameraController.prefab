@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515367413774046648}
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 1500, z: -1500}
+  m_LocalPosition: {x: 0, y: 1500, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -420,7 +420,7 @@ Transform:
   - {fileID: 6373746542608464810}
   - {fileID: 4183004976574252872}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5642378919837089247
 MonoBehaviour:
@@ -439,7 +439,7 @@ MonoBehaviour:
   normalSpeed: 1
   fastSpeed: 3
   movementTime: 5
-  maxVelocity: 500
+  maxVelocity: 50000
   maxRange: 2500
   minRange: 250
   rotationSpeed: 1

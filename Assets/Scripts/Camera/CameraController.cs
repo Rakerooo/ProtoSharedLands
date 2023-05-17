@@ -54,7 +54,8 @@ namespace Camera
                 newPosition = rig.position;
                 newRotation = rig.rotation;
                 oldZoomAmount = zoomAmount;
-                if (zoomTime == 0) zoomTime = 0.01f;
+                if (rotationTime == 0) rotationTime = 0.001f;
+                if (zoomTime == 0) zoomTime = 0.001f;
             }
 
             private void Update()
@@ -161,7 +162,7 @@ namespace Camera
             rig.position = Vector3.SmoothDamp(rig.position, newPosition, ref currentVelocity, movementTime, maxVelocity);
             
             // Rotation
-            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime * rotationTime);
+            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime);
             
             // Zoom
             oldZoomAmount = Mathf.Lerp(oldZoomAmount, zoomAmount, Time.deltaTime / zoomTime);
