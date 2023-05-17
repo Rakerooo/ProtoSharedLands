@@ -14,10 +14,10 @@ namespace Camera
             [SerializeField] private float maxVelocity = 500;
             [SerializeField] private float maxRange = 2500;
             [SerializeField] private float minRange = 250;
-            [SerializeField] private float panningMarginLeft = 0.1f;
-            [SerializeField] private float panningMarginRight = 0.1f;
-            [SerializeField] private float panningMarginTop = 0.075f;
-            [SerializeField] private float panningMarginBottom = 0.075f;
+            [SerializeField] private float panningMarginWidth = 0.01f;
+            [SerializeField] private float panningMarginHeight = 0.01f;
+            [SerializeField] private float panningAngleWidth = 0.1f;
+            [SerializeField] private float panningAngleHeight = 0.1f;
 
             private Vector3 dragStartPosition, dragCurrentPosition;
             private Vector3 newPosition;
@@ -26,10 +26,15 @@ namespace Camera
             
             private float movementSpeed => Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
             private Vector3 view => cam == null ? Vector3.zero : cam.ScreenToViewportPoint(Input.mousePosition) ;
-            private bool IsPanningLeft => view.x <= panningMarginLeft && view.x >= 0;
-            private bool IsPanningRight => view.x >= 1 - panningMarginRight && view.x <= 1;
-            private bool IsPanningTop => view.y >= 1 - panningMarginTop && view.y <= 1;
-            private bool IsPanningBottom => view.y <= panningMarginBottom && view.y >= 0;
+            private bool IsPanningLeft => view.x <= panningMarginWidth;
+            private bool IsPanningRight => view.x >= 1 - panningMarginWidth;
+            private bool IsPanningTop => view.y >= 1 - panningMarginHeight;
+            private bool IsPanningBottom => view.y <= panningMarginHeight;
+
+            private bool IsPanningTopLeft => view.x <= panningAngleWidth && view.y >= 1 - panningAngleHeight;
+            private bool IsPanningTopRight => view.x >= 1 - panningAngleWidth && view.y >= 1 - panningAngleHeight;
+            private bool IsPanningBottomLeft => view.x <= panningAngleWidth && view.y <= panningAngleHeight;
+            private bool IsPanningBottomRight => view.x >= 1 - panningAngleWidth && view.y <= panningAngleHeight;
         #endregion
         #region Rotation attributes
             [Header("Rotation attributes")] [Tooltip("QE")]
@@ -74,7 +79,6 @@ namespace Camera
 
             private void Update()
             {
-                Debug.Log($"{view.x} {view.y} {view.z} : {IsPanningLeft}, {IsPanningRight}, {IsPanningTop}, {IsPanningBottom} ({Utils.IsMouseOverWindow(cam)})");
                 HandleMouseInputs();
                 HandleKeyboardInputs();
                 ProcessInputs();
@@ -87,10 +91,10 @@ namespace Camera
                 // Movement
                 if (!dragStartSet && !rotatingMouse)
                 {
-                    if (IsPanningLeft) newPosition += -rig.right * movementSpeed;
-                    if (IsPanningRight) newPosition += rig.right * movementSpeed;
-                    if (IsPanningTop) newPosition += rig.forward * movementSpeed;
-                    if (IsPanningBottom) newPosition += -rig.forward * movementSpeed;
+                    if (IsPanningLeft || IsPanningTopLeft || IsPanningBottomLeft) newPosition += -rig.right * movementSpeed;
+                    if (IsPanningRight || IsPanningTopRight || IsPanningBottomRight) newPosition += rig.right * movementSpeed;
+                    if (IsPanningTop || IsPanningTopLeft || IsPanningTopRight) newPosition += rig.forward * movementSpeed;
+                    if (IsPanningBottom || IsPanningBottomLeft || IsPanningBottomRight) newPosition += -rig.forward * movementSpeed;
                 }
                 var range = Mathf.Lerp(minRange, maxRange, oldZoomAmount == 0 ? 1 : 1 - oldZoomAmount);
                 if (Input.GetMouseButtonDown(0))

@@ -420,7 +420,7 @@ Transform:
   - {fileID: 6373746542608464810}
   - {fileID: 4183004976574252872}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5642378919837089247
 MonoBehaviour:
@@ -436,24 +436,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 6988593937552071856}
   rig: {fileID: 4183004976574252872}
-  normalSpeed: 1
+  normalSpeed: 8
   fastSpeed: 3
   movementTime: 0.1
   maxVelocity: 50000
   maxRange: 2500
   minRange: 250
-  panningMarginLeft: 0.1
-  panningMarginRight: 0.1
-  panningMarginTop: 0.075
-  panningMarginBottom: 0.075
+  panningMarginWidth: 0.025
+  panningMarginHeight: 0.025
+  panningAngleWidth: 0.1
+  panningAngleHeight: 0.1
   rotationSpeed: 1
   rotationTime: 0.1
-  zoomForce: 0.05
+  cancelRotationMultiplier: 0.2
+  zoomForce: 3
   zoomTime: 0.1
   scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
   end: {fileID: 4914040741525889396}
-  zoomAmount: 0.2
+  zoomAmount: 0.6794595
   maxNorth: {fileID: 6825774753183312592}
   maxSouth: {fileID: 119791398403895913}
   maxEast: {fileID: 294480591679976876}
