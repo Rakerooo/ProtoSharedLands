@@ -53,6 +53,7 @@ namespace Map.Grid
             CreateMesh();
         }
         
+        [ContextMenu("Refresh")]
         private void OnEnable()
         {
             meshFilter.mesh = mesh;
