@@ -14,19 +14,33 @@ namespace Camera
             [SerializeField] private float maxVelocity = 500;
             [SerializeField] private float maxRange = 2500;
             [SerializeField] private float minRange = 250;
+            [SerializeField] private float panningMarginLeft = 0.1f;
+            [SerializeField] private float panningMarginRight = 0.1f;
+            [SerializeField] private float panningMarginTop = 0.075f;
+            [SerializeField] private float panningMarginBottom = 0.075f;
 
             private Vector3 dragStartPosition, dragCurrentPosition;
             private Vector3 newPosition;
             private Vector3 currentVelocity;
             private bool dragStartSet;
+            
+            private float movementSpeed => Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
+            private Vector3 view => cam == null ? Vector3.zero : cam.ScreenToViewportPoint(Input.mousePosition) ;
+            private bool IsPanningLeft => view.x <= panningMarginLeft;
+            private bool IsPanningRight => view.x >= 1 - panningMarginRight;
+            private bool IsPanningTop => view.y >= 1 - panningMarginTop;
+            private bool IsPanningBottom => view.y <= panningMarginBottom;
         #endregion
         #region Rotation attributes
             [Header("Rotation attributes")] [Tooltip("QE")]
             [SerializeField] private float rotationSpeed = 1;
             [SerializeField] private float rotationTime = 5;
+            [SerializeField] private float cancelRotationMultiplier = 0.2f;
 
             private Vector3 rotateStartPosition, rotateCurrentPosition;
             private Quaternion newRotation;
+            private Quaternion oldRotation;
+            private bool rotatingKeyboard, rotatingMouse;
         #endregion
         #region Zoom attributes
             [Header("Zoom attributes")] [Tooltip("RF")]
@@ -60,6 +74,7 @@ namespace Camera
 
             private void Update()
             {
+                Debug.Log($"{view.x} {view.y} {view.z} : {IsPanningLeft}, {IsPanningRight}, {IsPanningTop}, {IsPanningBottom} ({Utils.IsMouseOverWindow(cam)})");
                 HandleMouseInputs();
                 HandleKeyboardInputs();
                 ProcessInputs();
@@ -70,6 +85,13 @@ namespace Camera
             private void HandleMouseInputs()
             {
                 // Movement
+                if (!dragStartSet && !rotatingMouse)
+                {
+                    if (IsPanningLeft) newPosition += -rig.right * movementSpeed;
+                    if (IsPanningRight) newPosition += rig.right * movementSpeed;
+                    if (IsPanningTop) newPosition += rig.forward * movementSpeed;
+                    if (IsPanningBottom) newPosition += -rig.forward * movementSpeed;
+                }
                 var range = Mathf.Lerp(minRange, maxRange, oldZoomAmount == 0 ? 1 : 1 - oldZoomAmount);
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -113,13 +135,26 @@ namespace Camera
                 if (Input.GetMouseButtonUp(0)) dragStartSet = false;
                 
                 // Rotation
-                if (Input.GetMouseButtonDown(1)) rotateStartPosition = Input.mousePosition;
+                if (Input.GetMouseButtonDown(1))
+                {
+                    rotateStartPosition = Input.mousePosition;
+                    if (!rotatingKeyboard)
+                    {
+                        oldRotation = newRotation;
+                        rotatingMouse = true;
+                    }
+                }
                 if (Input.GetMouseButton(1))
                 {
                     rotateCurrentPosition = Input.mousePosition;
                     var diffRotationPosition = rotateStartPosition - rotateCurrentPosition;
                     rotateStartPosition = rotateCurrentPosition;
                     newRotation *= Quaternion.Euler(Vector3.up * (-diffRotationPosition.x / 5f));
+                }
+                if (Input.GetMouseButtonUp(1))
+                {
+                    newRotation = oldRotation;
+                    rotatingMouse = false;
                 }
                 
                 // Zoom
@@ -128,8 +163,6 @@ namespace Camera
             
             private void HandleKeyboardInputs()
             {
-                var movementSpeed = Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
-                
                 // Movement
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                     newPosition += rig.forward * movementSpeed;
@@ -141,10 +174,20 @@ namespace Camera
                     newPosition += rig.right * movementSpeed;
 
                 // Rotation
+                if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)) && !rotatingMouse)
+                {
+                    oldRotation = newRotation;
+                    rotatingKeyboard = true;
+                }
                 if (Input.GetKey(KeyCode.Q))
                     newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
                 if (Input.GetKey(KeyCode.E))
                     newRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed);
+                if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))
+                {
+                    newRotation = oldRotation;
+                    rotatingKeyboard = false;
+                }
                 
                 // Zoom
                 if (Input.GetKey(KeyCode.R))
@@ -162,7 +205,7 @@ namespace Camera
             rig.position = Vector3.SmoothDamp(rig.position, newPosition, ref currentVelocity, movementTime, maxVelocity);
             
             // Rotation
-            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime);
+            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime * (rotatingMouse || rotatingKeyboard ? 1 : cancelRotationMultiplier));
             
             // Zoom
             oldZoomAmount = Mathf.Lerp(oldZoomAmount, zoomAmount, Time.deltaTime / zoomTime);

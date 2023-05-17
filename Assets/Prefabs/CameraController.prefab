@@ -438,14 +438,18 @@ MonoBehaviour:
   rig: {fileID: 4183004976574252872}
   normalSpeed: 1
   fastSpeed: 3
-  movementTime: 5
+  movementTime: 0.1
   maxVelocity: 50000
   maxRange: 2500
   minRange: 250
+  panningMarginLeft: 0.1
+  panningMarginRight: 0.1
+  panningMarginTop: 0.075
+  panningMarginBottom: 0.075
   rotationSpeed: 1
-  rotationTime: 5
+  rotationTime: 0.1
   zoomForce: 0.05
-  zoomTime: 5
+  zoomTime: 0.1
   scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
   end: {fileID: 4914040741525889396}
