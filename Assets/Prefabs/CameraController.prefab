@@ -449,12 +449,12 @@ MonoBehaviour:
   rotationSpeed: 1
   rotationTime: 0.1
   cancelRotationMultiplier: 0.2
-  zoomForce: 0.5
+  zoomForce: 2
   zoomTime: 0.1
   scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
   end: {fileID: 4914040741525889396}
-  zoomAmount: 0.6794595
+  zoomAmount: 0.5
   maxNorth: {fileID: 6825774753183312592}
   maxSouth: {fileID: 119791398403895913}
   maxEast: {fileID: 294480591679976876}

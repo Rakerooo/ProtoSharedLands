@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Grid
+namespace Map.Grid
 {
     public class HexGridLayout : MonoBehaviour
     {
@@ -41,10 +41,11 @@ namespace Grid
             {
                 for (var x = 0; x < gridSize.x; x++)
                 {
-                    var tile = new GameObject($"Hex ({x}, {y})", typeof(HexRenderer));
+                    var pos = new Vector2Int(x, y);
+                    var tile = new GameObject($"Hex ({x}, {y})", typeof(Hexagon));
                     var tileTransform = tile.transform;
-                    tileTransform.position = GetHexPosFromCoordinates(new Vector2Int(x, y));
-                    tile.GetComponent<HexRenderer>().InstantiateRenderer(material, innerSize, outerSize, height, isFlatTopped);
+                    tileTransform.position = GetHexPosFromCoordinates(pos);
+                    tile.GetComponent<Hexagon>().Init(pos, material, innerSize, outerSize, height, isFlatTopped);
                     tileTransform.SetParent(transform, true);
                 }
             }

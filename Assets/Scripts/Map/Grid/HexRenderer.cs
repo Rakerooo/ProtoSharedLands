@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Grid
+namespace Map.Grid
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class HexRenderer : MonoBehaviour

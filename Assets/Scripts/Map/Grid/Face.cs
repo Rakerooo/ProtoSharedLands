@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Grid
+namespace Map.Grid
 {
     public struct Face
     {
