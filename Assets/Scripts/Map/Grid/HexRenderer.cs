@@ -80,8 +80,6 @@ namespace Grid
                 // Inner faces
                 faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
             }
-            
-            Debug.Log(gameObject.name + " : " + faces.Count);
         }
         
         private void CombineFaces()
