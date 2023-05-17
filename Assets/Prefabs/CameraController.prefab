@@ -449,7 +449,7 @@ MonoBehaviour:
   rotationSpeed: 1
   rotationTime: 0.1
   cancelRotationMultiplier: 0.2
-  zoomForce: 3
+  zoomForce: 0.5
   zoomTime: 0.1
   scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
