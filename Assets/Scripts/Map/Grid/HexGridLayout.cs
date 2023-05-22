@@ -37,9 +37,9 @@ namespace Map.Grid
                 else Destroy(goTransform.GetChild(i).gameObject);
             }
             
-            for (var y = 0; y < gridSize.y; y++)
+            for (var y = -gridSize.y/2; y < gridSize.y/2; y++)
             {
-                for (var x = 0; x < gridSize.x; x++)
+                for (var x = -gridSize.x/2; x < gridSize.x/2; x++)
                 {
                     var pos = new Vector2Int(x, y);
                     var tile = new GameObject($"Hex ({x}, {y})", typeof(Hexagon));

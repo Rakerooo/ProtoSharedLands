@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Map
 {
     [RequireComponent(typeof(HexRenderer))]
-    public class Hexagon : MonoBehaviour
+    public class Hexagon : MonoBehaviour, IHoverable, ISelectable
     {
         private Vector2Int positionInGrid;
         private Region region;
@@ -18,6 +18,26 @@ namespace Map
             
             positionInGrid = _posInGrid;
             hexRenderer.InstantiateRenderer(_material, _innerSize, _outerSize, _height, _isFlatTopped);
+        }
+
+        public void OnHoverEnable()
+        {
+            Debug.Log("hover");
+        }
+
+        public void OnHoverDisable()
+        {
+            Debug.Log("unhover");
+        }
+
+        public void OnSelectItem()
+        {
+            Debug.Log("selected");
+        }
+
+        public void OnDeselectItem()
+        {
+            Debug.Log("deselected");
         }
     }
 }

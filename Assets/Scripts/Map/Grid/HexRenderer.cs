@@ -78,8 +78,11 @@ namespace Map.Grid
                 // Outer faces
                 faces.Add(CreateFace(outerSize, outerSize, height / 2f, -height / 2f, point, true));
                 
-                // Inner faces
-                faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
+                if (innerSize <= 0)
+                {
+                    // Inner faces
+                    faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
+                }
             }
         }
         
