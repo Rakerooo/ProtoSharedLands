@@ -8,19 +8,16 @@ using UnityEngine.InputSystem;
 
 public class MouseHandler : MonoBehaviour
 {
-    private UnityEngine.Camera mainCamera;
+    [SerializeField] private SO_Layers layers;
+    [SerializeField] private UnityEngine.Camera cam;
     private IHoverable currentHover;
-
-    private void Awake()
-    {
-        mainCamera = UnityEngine.Camera.main;
-    }
+    
     private void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            var ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            Physics.Raycast(ray, out var hit, Mathf.Infinity, layerMask: LayerMask.NameToLayer("Hoverable"));
+            var ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Physics.Raycast(ray, out var hit, Mathf.Infinity, layers.hoverableMask);
             if (hit.collider)
             {
                 IHoverable tmp = hit.collider.GetComponent<IHoverable>();
