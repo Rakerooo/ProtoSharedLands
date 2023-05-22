@@ -21,11 +21,6 @@ namespace Map.Grid
         {
             LayoutGrid(true);
         }
-        
-        private void OnEnable()
-        {
-            LayoutGrid(false);
-        }
 
         private void LayoutGrid(bool editor)
         {
@@ -43,10 +38,13 @@ namespace Map.Grid
                 {
                     var pos = new Vector2Int(x, y);
                     var tile = new GameObject($"Hex ({x}, {y})", typeof(Hexagon));
+                    
                     var tileTransform = tile.transform;
                     tileTransform.position = GetHexPosFromCoordinates(pos);
-                    tile.GetComponent<Hexagon>().Init(pos, material, innerSize, outerSize, height, isFlatTopped);
                     tileTransform.SetParent(transform, true);
+                    
+                    var hexagon = tile.GetComponent<Hexagon>();
+                    hexagon.Init(pos, material, innerSize, outerSize, height, isFlatTopped);
                 }
             }
         }

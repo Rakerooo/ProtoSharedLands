@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Map.Grid
 {
-    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class HexRenderer : MonoBehaviour
     {
         private Mesh mesh;
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
-
+        private MeshCollider meshCollider;
+        
         private const string meshName = "Hex";
 
         [SerializeField] private Material material;
@@ -33,11 +34,24 @@ namespace Map.Grid
             DrawMesh();
             CombineFaces();
         }
+        
+        [ContextMenu("Refresh")]
+        private void Refresh()
+        {
+            CreateMesh();
+            
+            meshFilter.mesh = mesh;
+            meshRenderer.material = material;
+            
+            DrawMesh();
+            CombineFaces();
+        }
 
         private void CreateMesh()
         {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
+            meshCollider = GetComponent<MeshCollider>();
             
             mesh = new Mesh
             {
@@ -46,21 +60,7 @@ namespace Map.Grid
             
             meshFilter.mesh = mesh;
             meshRenderer.material = material;
-        }
-        
-        private void Awake()
-        {
-            CreateMesh();
-        }
-        
-        [ContextMenu("Refresh")]
-        private void OnEnable()
-        {
-            meshFilter.mesh = mesh;
-            meshRenderer.material = material;
-            
-            DrawMesh();
-            CombineFaces();
+            meshCollider.sharedMesh = mesh;
         }
         
         private void DrawMesh()
