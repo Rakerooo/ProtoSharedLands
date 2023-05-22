@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Grid
+namespace Map.Grid
 {
-    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class HexRenderer : MonoBehaviour
     {
         private Mesh mesh;
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
-
+        private MeshCollider meshCollider;
+        
         private const string meshName = "Hex";
 
         [SerializeField] private Material material;
@@ -33,11 +34,24 @@ namespace Grid
             DrawMesh();
             CombineFaces();
         }
+        
+        [ContextMenu("Refresh")]
+        private void Refresh()
+        {
+            CreateMesh();
+            
+            meshFilter.mesh = mesh;
+            meshRenderer.material = material;
+            
+            DrawMesh();
+            CombineFaces();
+        }
 
         private void CreateMesh()
         {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
+            meshCollider = GetComponent<MeshCollider>();
             
             mesh = new Mesh
             {
@@ -46,20 +60,7 @@ namespace Grid
             
             meshFilter.mesh = mesh;
             meshRenderer.material = material;
-        }
-        
-        private void Awake()
-        {
-            CreateMesh();
-        }
-        
-        private void OnEnable()
-        {
-            meshFilter.mesh = mesh;
-            meshRenderer.material = material;
-            
-            DrawMesh();
-            CombineFaces();
+            meshCollider.sharedMesh = mesh;
         }
         
         private void DrawMesh()
@@ -77,8 +78,11 @@ namespace Grid
                 // Outer faces
                 faces.Add(CreateFace(outerSize, outerSize, height / 2f, -height / 2f, point, true));
                 
-                // Inner faces
-                faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
+                if (innerSize <= 0)
+                {
+                    // Inner faces
+                    faces.Add(CreateFace(innerSize, innerSize, height / 2f, -height / 2f, point));
+                }
             }
         }
         
