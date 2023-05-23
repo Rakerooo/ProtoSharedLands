@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 50, y: 50}
-  material: {fileID: 2100000, guid: 1a8aefb52fa3b7a4692b58ca2de7cbf0, type: 2}
-  innerSize: 30
-  outerSize: 50
+  hexMats: {fileID: 11400000, guid: 742e04e3c1725cb498bae646a92387cf, type: 2}
+  innerSize: 0
+  outerSize: 75
   height: 1
   isFlatTopped: 0
