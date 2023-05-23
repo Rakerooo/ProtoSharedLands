@@ -19,12 +19,12 @@ namespace Map
             hexRenderer = GetComponent<HexRenderer>();
         }
 
-        public void Init(Vector2Int _posInGrid, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        public void Init(Vector2Int _posInGrid, Material _mat, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
         {
             Awake();
-            gameObject.layer += GameManager.instance.Layers.hoverableMask;
+            gameObject.layer += LayerMask.NameToLayer("Hoverable");
             positionInGrid = _posInGrid;
-            hexRenderer.InstantiateRenderer(_innerSize, _outerSize, _height, _isFlatTopped);
+            hexRenderer.Init(_mat, _innerSize, _outerSize, _height, _isFlatTopped);
         }
 
         public void OnHoverEnable()

@@ -19,6 +19,7 @@ namespace Map.Grid
         [SerializeField] private float outerSize;
         [SerializeField] private float height;
         [SerializeField] private bool isFlatTopped;
+        [SerializeField] private Material material;
 
         private List<Face> faces;
 
@@ -29,14 +30,14 @@ namespace Map.Grid
             meshCollider = GetComponent<MeshCollider>();
         }
 
-        public void InstantiateRenderer(float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        public void Init(Material _mat, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
         {
             innerSize = _innerSize;
             outerSize = _outerSize;
             height = _height;
             isFlatTopped = _isFlatTopped;
+            material = _mat;
             CreateMesh();
-            
             DrawMesh();
             CombineFaces();
         }
@@ -59,7 +60,7 @@ namespace Map.Grid
             };
             
             meshFilter.mesh = mesh;
-            meshRenderer.material = GameManager.instance.HexMats.basic;
+            meshRenderer.material = material;
             meshCollider.sharedMesh = mesh;
         }
         

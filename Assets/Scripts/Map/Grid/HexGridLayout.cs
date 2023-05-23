@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Map.Grid
@@ -6,6 +7,7 @@ namespace Map.Grid
     {
         [Header("Grid settings")]
         [SerializeField] private Vector2Int gridSize;
+        [SerializeField] private SO_HexMats hexMats;
     
         [Header("Tile settings")]
         [SerializeField] private float innerSize;
@@ -43,7 +45,7 @@ namespace Map.Grid
                     tileTransform.SetParent(transform, true);
                     
                     var hexagon = tile.GetComponent<Hexagon>();
-                    hexagon.Init(pos, innerSize, outerSize, height, isFlatTopped);
+                    hexagon.Init(pos, hexMats.basic, innerSize, outerSize, height, isFlatTopped);
                 }
             }
         }
