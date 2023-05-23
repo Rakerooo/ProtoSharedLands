@@ -8,7 +8,6 @@ namespace Map.Grid
         [SerializeField] private Vector2Int gridSize;
     
         [Header("Tile settings")]
-        [SerializeField] private Material material;
         [SerializeField] private float innerSize;
         [SerializeField] private float outerSize = 10f;
         [SerializeField] private float height = 1f;
@@ -44,7 +43,7 @@ namespace Map.Grid
                     tileTransform.SetParent(transform, true);
                     
                     var hexagon = tile.GetComponent<Hexagon>();
-                    hexagon.Init(pos, material, innerSize, outerSize, height, isFlatTopped);
+                    hexagon.Init(pos, innerSize, outerSize, height, isFlatTopped);
                 }
             }
         }

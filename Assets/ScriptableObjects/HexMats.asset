@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d545a6030bf2b84aad58068304a46bf, type: 3}
+  m_Name: HexMats
+  m_EditorClassIdentifier: 
+  hovered: {fileID: 2100000, guid: 892e6df04799c4a43a2b9c786af816e2, type: 2}
+  selected: {fileID: 2100000, guid: 1a8aefb52fa3b7a4692b58ca2de7cbf0, type: 2}
+  basic: {fileID: 2100000, guid: f559c1113c9ab9f48a78e94b32d36a6b, type: 2}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +9,6 @@ using UnityEngine.InputSystem;
 
 public class MouseHandler : MonoBehaviour
 {
-    [SerializeField] private SO_Layers layers;
     [SerializeField] private UnityEngine.Camera cam;
     private IHoverable currentHover;
     
@@ -17,7 +17,7 @@ public class MouseHandler : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             var ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            Physics.Raycast(ray, out var hit, Mathf.Infinity, layers.hoverableMask);
+            Physics.Raycast(ray, out var hit, Mathf.Infinity, GameManager.instance.Layers.hoverableMask);
             if (hit.collider)
             {
                 IHoverable tmp = hit.collider.GetComponent<IHoverable>();

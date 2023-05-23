@@ -1,3 +1,4 @@
+using System;
 using Map.Grid;
 using UnityEngine;
 
@@ -11,32 +12,50 @@ namespace Map
         private HexagonType type;
         private HexRenderer hexRenderer;
 
-        public void Init(Vector2Int _posInGrid, Material _material, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        private bool selected, hovered;
+
+        private void Awake()
         {
             hexRenderer = GetComponent<HexRenderer>();
-            gameObject.layer += LayerMask.NameToLayer("Hoverable");
+        }
+
+        public void Init(Vector2Int _posInGrid, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        {
+            Awake();
+            gameObject.layer += GameManager.instance.Layers.hoverableMask;
             positionInGrid = _posInGrid;
-            hexRenderer.InstantiateRenderer(_material, _innerSize, _outerSize, _height, _isFlatTopped);
+            hexRenderer.InstantiateRenderer(_innerSize, _outerSize, _height, _isFlatTopped);
         }
 
         public void OnHoverEnable()
         {
-            Debug.Log("hover");
+            hovered = true;
+            UpdateMat();
         }
 
         public void OnHoverDisable()
         {
-            Debug.Log("unhover");
+            hovered = false;
+            UpdateMat();
         }
 
         public void OnSelectItem()
         {
-            Debug.Log("selected");
+            selected = true;
+            UpdateMat();
         }
 
         public void OnDeselectItem()
         {
-            Debug.Log("deselected");
+            selected = false;
+            UpdateMat();
+        }
+
+        private void UpdateMat()
+        {
+            if (selected) hexRenderer.SetMaterial(GameManager.instance.HexMats.selected);
+            else if (hovered) hexRenderer.SetMaterial(GameManager.instance.HexMats.hovered);
+            else hexRenderer.SetMaterial(GameManager.instance.HexMats.basic);
         }
     }
 }

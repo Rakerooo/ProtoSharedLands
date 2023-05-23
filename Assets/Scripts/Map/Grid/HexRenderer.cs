@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace Map.Grid
         
         private const string meshName = "Hex";
 
-        [SerializeField] private Material material;
         [SerializeField] private float innerSize;
         [SerializeField] private float outerSize;
         [SerializeField] private float height;
@@ -22,9 +22,15 @@ namespace Map.Grid
 
         private List<Face> faces;
 
-        public void InstantiateRenderer(Material _material, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        private void Awake()
         {
-            material = _material;
+            meshFilter = GetComponent<MeshFilter>();
+            meshRenderer = GetComponent<MeshRenderer>();
+            meshCollider = GetComponent<MeshCollider>();
+        }
+
+        public void InstantiateRenderer(float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        {
             innerSize = _innerSize;
             outerSize = _outerSize;
             height = _height;
@@ -39,19 +45,13 @@ namespace Map.Grid
         private void Refresh()
         {
             CreateMesh();
-            
-            meshFilter.mesh = mesh;
-            meshRenderer.material = material;
-            
             DrawMesh();
             CombineFaces();
         }
 
         private void CreateMesh()
         {
-            meshFilter = GetComponent<MeshFilter>();
-            meshRenderer = GetComponent<MeshRenderer>();
-            meshCollider = GetComponent<MeshCollider>();
+            Awake();
             
             mesh = new Mesh
             {
@@ -59,7 +59,7 @@ namespace Map.Grid
             };
             
             meshFilter.mesh = mesh;
-            meshRenderer.material = material;
+            meshRenderer.material = GameManager.instance.HexMats.basic;
             meshCollider.sharedMesh = mesh;
         }
         
@@ -134,6 +134,11 @@ namespace Map.Grid
             var radAngle = Mathf.PI / 180f * degAngle;
             
             return new Vector3(_size * Mathf.Cos(radAngle), _height, _size * Mathf.Sin(radAngle));
+        }
+
+        public void SetMaterial(Material mat)
+        {
+            meshRenderer.material = mat;
         }
     }
 }
