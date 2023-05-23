@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4312667288371048809}
   - component: {fileID: 640346421769133024}
+  - component: {fileID: 880365607726196914}
   m_Layer: 0
   m_Name: HexGrid
   m_TagString: Untagged
@@ -45,8 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 50, y: 50}
-  material: {fileID: 2100000, guid: 1a8aefb52fa3b7a4692b58ca2de7cbf0, type: 2}
-  innerSize: 30
-  outerSize: 50
+  hexMats: {fileID: 11400000, guid: 742e04e3c1725cb498bae646a92387cf, type: 2}
+  innerSize: 0
+  outerSize: 75
   height: 1
   isFlatTopped: 0
+--- !u!114 &880365607726196914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991399502021653306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efdeceaebaf78d499a63bfe74a3b822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
