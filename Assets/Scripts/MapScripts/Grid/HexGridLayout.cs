@@ -7,7 +7,7 @@ namespace MapScripts.Grid
     {
         [Header("Grid settings")]
         [SerializeField] private Vector2Int gridSize;
-        [SerializeField] private SO_HexMats hexMats;
+        [SerializeField] private SO_HexColors hexColors;
     
         [Header("Tile settings")]
         [SerializeField] private float innerSize;
@@ -45,7 +45,12 @@ namespace MapScripts.Grid
                     tileTransform.SetParent(transform, true);
                     
                     var hexagon = tile.GetComponent<Hexagon>();
-                    hexagon.Init(pos, hexMats.basic, innerSize, outerSize, height, isFlatTopped);
+                    var material = new Material(Shader.Find("Universal Render Pipeline/Lit"))
+                    {
+                        color = hexColors.basic
+                    };
+
+                    hexagon.Init(pos, material, innerSize, outerSize, height, isFlatTopped);
                 }
             }
         }

@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private SO_Layers soLayers;
-    [SerializeField] private SO_HexMats soHexMats;
+    [SerializeField] private SO_HexColors soHexColors;
     public SO_Layers Layers => soLayers;
-    public SO_HexMats HexMats => soHexMats;
+    public SO_HexColors HexColors => soHexColors;
 
     [SerializeField] private Map map;
     public Map Map => map;
