@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515367413774046648}
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 1500, z: -1500}
+  m_LocalPosition: {x: 0, y: 1500, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -436,20 +436,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 6988593937552071856}
   rig: {fileID: 4183004976574252872}
-  normalSpeed: 1
+  normalSpeed: 8
   fastSpeed: 3
-  movementTime: 5
-  maxVelocity: 500
+  movementTime: 0.1
+  maxVelocity: 50000
   maxRange: 2500
   minRange: 250
+  panningMarginWidth: 0.025
+  panningMarginHeight: 0.025
+  panningAngleWidth: 0.1
+  panningAngleHeight: 0.1
   rotationSpeed: 1
-  rotationTime: 5
-  zoomForce: 0.05
-  zoomTime: 5
+  rotationTime: 0.1
+  cancelRotationMultiplier: 0.2
+  zoomForce: 2
+  zoomTime: 0.1
   scrollMultiplier: 5
   start: {fileID: 7126008904530524023}
   end: {fileID: 4914040741525889396}
-  zoomAmount: 0.2
+  zoomAmount: 0.5
   maxNorth: {fileID: 6825774753183312592}
   maxSouth: {fileID: 119791398403895913}
   maxEast: {fileID: 294480591679976876}
