@@ -1,13 +1,27 @@
-using Map;
+using MapScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SimpleUnit : MonoBehaviour, INavUnit
+public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
 {
-    private bool canMove;
+    [Header("Debug")]
+    [SerializeField] Hexagon debugHex; 
+    [SerializeField] private bool canMove = true;
+
     [SerializeField] NavMeshAgent agent;
+
+    [SerializeField] MeshRenderer rend;
+    [SerializeField] Material selectedMat;
+    [SerializeField] Material classicMat;
+    [SerializeField] Material hoverMat;
+
+    [ContextMenu("Debug Move")]
+    public void DebugMove()
+    {
+        MoveToDestination(debugHex);
+    }
 
     public void MoveToDestination(Vector3 destination)
     {
@@ -15,10 +29,30 @@ public class SimpleUnit : MonoBehaviour, INavUnit
         agent.SetDestination(destination);
     }
 
-    public void MoveToDestination(Hexagon hexagonDestination)
+    public void MoveToDestination(Hexagon destination)
     {
-        if(!canMove) return;
+        if (!canMove) return;
+        agent.SetDestination(destination.transform.position);
+    }
 
-        agent.SetDestination(hexagonDestination.transform.position);
+    public void OnDeselectItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnHoverDisable()
+    {
+        rend.material = classicMat;
+    }
+
+    public void OnHoverEnable()
+    {
+        rend.material = hoverMat;
+    }
+
+    public void OnSelectItem()
+    {
+        rend.material = selectedMat;
+
     }
 }
