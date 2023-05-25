@@ -97,7 +97,7 @@ namespace Camera
                     if (IsPanningBottom || IsPanningBottomLeft || IsPanningBottomRight) newPosition += -rig.forward * movementSpeed;
                 }
                 var range = Mathf.Lerp(minRange, maxRange, oldZoomAmount == 0 ? 1 : 1 - oldZoomAmount);
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(2))
                 {
                     var plane = new Plane(Vector3.up, Vector3.zero);
                     
@@ -112,7 +112,7 @@ namespace Camera
                         dragStartSet = true;
                     }
                 }
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(2))
                 {
                     var plane = new Plane(Vector3.up, Vector3.zero);
                     
@@ -136,7 +136,7 @@ namespace Camera
                         newPosition = (rig.position + dragStartPosition - dragCurrentPosition) * angleFactor;
                     }
                 }
-                if (Input.GetMouseButtonUp(0)) dragStartSet = false;
+                if (Input.GetMouseButtonUp(2)) dragStartSet = false;
                 
                 // Rotation
                 if (Input.GetMouseButtonDown(1))
