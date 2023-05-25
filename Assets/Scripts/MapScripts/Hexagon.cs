@@ -59,9 +59,11 @@ namespace MapScripts
 
         private void UpdateMat()
         {
-            if (selected) hexRenderer.SetMaterial(GameManager.instance.HexMats.selected);
-            else if (hovered) hexRenderer.SetMaterial(GameManager.instance.HexMats.hovered);
-            else hexRenderer.SetMaterial(GameManager.instance.HexMats.basic);
+            Debug.Log(hexRenderer);
+            Debug.Log(GameManager.instance);
+            if (selected) hexRenderer.SetColor(GameManager.instance.HexColors.selected);
+            else if (hovered) hexRenderer.SetColor(GameManager.instance.HexColors.hovered);
+            else hexRenderer.SetColor(GameManager.instance.HexColors.basic);
         }
     }
 }
