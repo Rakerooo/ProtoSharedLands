@@ -73,6 +73,7 @@ namespace Camera
             {
                 newPosition = rig.position;
                 newRotation = rig.rotation;
+                oldRotation = newRotation;
                 oldZoomAmount = zoomAmount;
                 if (rotationTime == 0) rotationTime = 0.001f;
                 if (zoomTime == 0) zoomTime = 0.001f;
@@ -143,11 +144,8 @@ namespace Camera
                 if (Input.GetMouseButtonDown(1))
                 {
                     rotateStartPosition = Input.mousePosition;
-                    if (!rotatingKeyboard)
-                    {
-                        oldRotation = newRotation;
-                        rotatingMouse = true;
-                    }
+                    newRotation = rig.rotation;
+                    if (!rotatingKeyboard) rotatingMouse = true;
                 }
                 if (Input.GetMouseButton(1))
                 {
@@ -170,26 +168,27 @@ namespace Camera
             {
                 // Movement
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-                    newPosition += rig.forward * movementSpeed;
+                    newPosition += Vector3.forward * movementSpeed;
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                    newPosition += -rig.right * movementSpeed;
+                    newPosition += -Vector3.right * movementSpeed;
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-                    newPosition += -rig.forward * movementSpeed;
+                    newPosition += -Vector3.forward * movementSpeed;
                 if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                    newPosition += rig.right * movementSpeed;
+                    newPosition += Vector3.right * movementSpeed;
 
                 // Rotation
                 if (!rotatingMouse)
                 {
                     if (Input.GetKeyDown(KeyCode.Q))
                     {
-                        oldRotation = newRotation;
                         rotatingKeyboardL = true;
+                        newRotation = rig.rotation;
                     }
+
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        oldRotation = newRotation;
                         rotatingKeyboardR = true;
+                        newRotation = rig.rotation;
                     }
                 }
                 if (Input.GetKey(KeyCode.Q))
