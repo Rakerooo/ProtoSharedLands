@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RMR_HexagonalGridTests.unity
     guid: f43315f75d65d584a866ce3cc4d137d5
+  - enabled: 1
+    path: Assets/Scenes/ProtoScene.unity
+    guid: 01712c693b847a441bacf3d6a474894a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bac259f4c8e4c2149baa93ef719ce1ba,
       type: 2}

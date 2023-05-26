@@ -169,13 +169,13 @@ namespace Camera
             {
                 // Movement
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-                    newPosition += Vector3.forward * movementSpeed;
+                    newPosition += rig.forward * movementSpeed;
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                    newPosition += -Vector3.right * movementSpeed;
+                    newPosition += -rig.right * movementSpeed;
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-                    newPosition += -Vector3.forward * movementSpeed;
+                    newPosition += -rig.forward * movementSpeed;
                 if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                    newPosition += Vector3.right * movementSpeed;
+                    newPosition += rig.right * movementSpeed;
 
                 // Rotation
                 if (!rotatingMouse)
@@ -226,7 +226,7 @@ namespace Camera
             var rotationY = newRotation.eulerAngles.y;
             switch (rotationY)
             {
-                case > 350:
+                case > 350 or < 0:
                     rotatingL = true;
                     rotatingR = false;
                     break;
@@ -236,6 +236,7 @@ namespace Camera
                     break;
             }
 
+            Debug.LogError(rotationY);
             if (rotatingMouse || rotatingKeyboard)
             {
                 if (rotatingL)
