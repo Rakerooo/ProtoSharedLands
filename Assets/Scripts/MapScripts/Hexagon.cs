@@ -1,4 +1,5 @@
 using MapScripts.Grid;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MapScripts
@@ -9,14 +10,25 @@ namespace MapScripts
         public Vector2Int positionInGrid { get; private set; }
         private Region region;
         private HexagonType type;
-        private HexRenderer hexRenderer;
+        private HexRenderer hexRendererOut, hexRendererIn;
         private Map map;
 
         private bool selected, hovered;
 
         private void Awake()
         {
-            hexRenderer = GetComponent<HexRenderer>();
+            hexRendererIn = GetComponent<HexRenderer>();
+            if (transform.childCount == 0)
+            {
+                var border = new GameObject("Border").gameObject;
+                border.transform.position = transform.position;
+                border.transform.SetParent(transform);
+                hexRendererOut = border.AddComponent<HexRenderer>();
+            }
+            else
+            {
+                hexRendererOut = transform.GetChild(0).gameObject.GetComponent<HexRenderer>();
+            }
         }
         
         private void Start()
@@ -24,12 +36,13 @@ namespace MapScripts
             if (GameManager.instance) map = GameManager.instance.Map;
         }
 
-        public void Init(Vector2Int _posInGrid, Material _mat, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
+        public void Init(Vector2Int _posInGrid, Material _matIn, Material _matOut, float _innerSize, float _outerSize, float _height, bool _isFlatTopped)
         {
             Awake();
             gameObject.layer += LayerMask.NameToLayer("Hoverable");
             positionInGrid = _posInGrid;
-            hexRenderer.Init(_mat, _innerSize, _outerSize, _height, _isFlatTopped);
+            hexRendererIn.Init(_matIn, 0, _innerSize, _height, _isFlatTopped);
+            hexRendererOut.Init(_matOut, _innerSize, _outerSize, _height, _isFlatTopped);
         }
 
         public void OnHoverEnable()
@@ -59,11 +72,9 @@ namespace MapScripts
 
         private void UpdateMat()
         {
-            Debug.Log(hexRenderer);
-            Debug.Log(GameManager.instance);
-            if (selected) hexRenderer.SetColor(GameManager.instance.HexColors.selected);
-            else if (hovered) hexRenderer.SetColor(GameManager.instance.HexColors.hovered);
-            else hexRenderer.SetColor(GameManager.instance.HexColors.basic);
+            if (selected) hexRendererIn.SetColor(GameManager.instance.HexColors.selected);
+            else if (hovered) hexRendererIn.SetColor(GameManager.instance.HexColors.hovered);
+            else hexRendererIn.SetColor(GameManager.instance.HexColors.basicIn);
         }
     }
 }

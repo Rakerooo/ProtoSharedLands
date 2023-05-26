@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d545a6030bf2b84aad58068304a46bf, type: 3}
   m_Name: HexColors
   m_EditorClassIdentifier: 
+  basicIn: {r: 0.50003135, g: 0.8301887, b: 0.105731584, a: 1}
+  basicOut: {r: 0.24053234, g: 0.46226418, b: 0.12428801, a: 1}
   hovered: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   selected: {r: 0, g: 0, b: 0, a: 1}
-  basic: {r: 0, g: 1, b: 0, a: 1}

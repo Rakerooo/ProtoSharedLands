@@ -138,7 +138,7 @@ namespace MapScripts.Grid
 
         public void SetColor(Color c)
         {
-            meshRenderer.material.color = Color.Lerp(GameManager.instance.HexColors.basic, c, 0.5f);
+            meshRenderer.material.color = Color.Lerp(GameManager.instance.HexColors.basicIn, c, 0.5f);
         }
     }
 }

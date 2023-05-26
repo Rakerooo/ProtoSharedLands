@@ -45,12 +45,16 @@ namespace MapScripts.Grid
                     tileTransform.SetParent(transform, true);
                     
                     var hexagon = tile.GetComponent<Hexagon>();
-                    var material = new Material(Shader.Find("Universal Render Pipeline/Lit"))
+                    var materialIn = new Material(Shader.Find("Universal Render Pipeline/Lit"))
                     {
-                        color = hexColors.basic
+                        color = hexColors.basicIn
+                    };
+                    var materialOut = new Material(Shader.Find("Universal Render Pipeline/Lit"))
+                    {
+                        color = hexColors.basicOut
                     };
 
-                    hexagon.Init(pos, material, innerSize, outerSize, height, isFlatTopped);
+                    hexagon.Init(pos, materialIn, materialOut, innerSize, outerSize, height, isFlatTopped);
                 }
             }
         }
