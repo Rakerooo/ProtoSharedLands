@@ -9,13 +9,17 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
     [Header("Debug")]
     [SerializeField] Hexagon debugHex; 
     [SerializeField] private bool canMove = true;
+    [SerializeField] UnitNavigationService unitNavigationService;
 
+    [Space(10f)]
     [SerializeField] NavMeshAgent agent;
 
     [SerializeField] MeshRenderer rend;
     [SerializeField] Material selectedMat;
     [SerializeField] Material classicMat;
     [SerializeField] Material hoverMat;
+
+    private bool isSelected = false;
 
     [ContextMenu("Debug Move")]
     public void DebugMove()
@@ -27,6 +31,7 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
     {
         if (!canMove) return;
         agent.SetDestination(destination);
+        rend.material = classicMat;
     }
 
     public void MoveToDestination(Hexagon destination)
@@ -37,32 +42,36 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
 
     public void OnDeselectItem()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+        rend.material = classicMat;
+        isSelected = false;
     }
 
     public void OnAlternateSelect()
     {
-        throw new System.NotImplementedException();
+        //Do nothing here  
     }
 
     public void OnAlternateDeselect()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void OnHoverDisable()
     {
-        rend.material = classicMat;
+        if(!isSelected) rend.material = classicMat;
     }
 
     public void OnHoverEnable()
     {
-        rend.material = hoverMat;
+        if(!isSelected) rend.material = hoverMat;
     }
 
     public void OnSelectItem()
     {
         rend.material = selectedMat;
+        unitNavigationService.SelectUnit(this);
 
+        isSelected = true;
     }
 }
