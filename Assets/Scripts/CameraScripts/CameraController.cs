@@ -224,9 +224,10 @@ namespace Camera
             
             // Rotation
             var rotationY = newRotation.eulerAngles.y;
+            rotationY = Mathf.Abs(rotationY);
             switch (rotationY)
             {
-                case > 350 or < 0:
+                case < 360 and > 350 or < 0:
                     rotatingL = true;
                     rotatingR = false;
                     break;
