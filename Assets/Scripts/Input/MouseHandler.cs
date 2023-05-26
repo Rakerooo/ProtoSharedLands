@@ -39,7 +39,14 @@ public class MouseHandler : MonoBehaviour
             }
         }
     }
-    
+
+    public void OnAlternateSelect()
+    {
+        if (currentHover is ISelectable hover && !EventSystem.current.IsPointerOverGameObject() && GameManager.instance.GetCanPlay())
+        {
+            hover.OnAlternateSelect();
+        }
+    }
     
     public void OnSelect()
     {
