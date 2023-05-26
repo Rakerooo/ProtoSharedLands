@@ -1,3 +1,4 @@
+using System.Collections;
 using MapScripts;
 using ScriptableObjects;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
     public SO_HexColors HexColors => soHexColors;
 
     [SerializeField] private Map map;
+
+    [SerializeField] private bool canPlay;
+    [SerializeField] private float turnTimeCoolDown;
     public Map Map => map;
 
     private void Awake()
@@ -24,5 +28,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        canPlay = true;
     }
+    public void SetCanPlay(bool value)
+    {
+        canPlay = value;
+    }public bool GetCanPlay()
+    {
+        return canPlay;
+    }
+    
 }

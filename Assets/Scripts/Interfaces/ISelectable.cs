@@ -6,4 +6,7 @@ public interface ISelectable
 {
     public void OnSelectItem();
     public void OnDeselectItem();
+    public void OnAlternateSelect();
+    public void OnAlternateDeselect();
+    
 }

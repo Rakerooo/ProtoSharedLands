@@ -70,6 +70,16 @@ namespace MapScripts
             UpdateMat();
         }
 
+        public void OnAlternateSelect()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnAlternateDeselect()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void UpdateMat()
         {
             if (selected) hexRendererIn.SetColor(GameManager.instance.HexColors.selected);
