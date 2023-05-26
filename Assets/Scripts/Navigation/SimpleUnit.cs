@@ -43,7 +43,7 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
     public void OnDeselectItem()
     {
         //throw new System.NotImplementedException();
-        Debug.Log($"{this.gameObject.name} On me déselectionne !");
+        Debug.Log($"{this.gameObject.name} On me dï¿½selectionne !");
         rend.material = classicMat;
         isSelected = false;
     }
@@ -70,7 +70,7 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
 
     public void OnSelectItem()
     {
-        Debug.Log($"{this.gameObject.name} On me sélectionne !");
+        //Debug.Log($"{this.gameObject.name} On me sï¿½lectionne !");
         rend.material = selectedMat;
         unitNavigationService.SelectUnit(this);
 
