@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2226599997580227821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 389, y: 40.5, z: 57}
-  m_LocalScale: {x: 60, y: 65, z: 60}
+  m_LocalScale: {x: 30, y: 50, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5384a93531ea65a409d7b33cfa41db6e, type: 2}
+  - {fileID: 2100000, guid: 4ac0ed39ef4060f48a277e9b03ec008d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,5 +149,5 @@ MonoBehaviour:
   agent: {fileID: 270347829906487011}
   rend: {fileID: 3509476229493336652}
   selectedMat: {fileID: 2100000, guid: f123b599009a37e40af69e367d2a1489, type: 2}
-  classicMat: {fileID: 2100000, guid: 5384a93531ea65a409d7b33cfa41db6e, type: 2}
-  hoverMat: {fileID: 2100000, guid: 69e39e1acb29f9b4d944ebced1f5ab79, type: 2}
+  classicMat: {fileID: 2100000, guid: 4ac0ed39ef4060f48a277e9b03ec008d, type: 2}
+  hoverMat: {fileID: 2100000, guid: 5384a93531ea65a409d7b33cfa41db6e, type: 2}
