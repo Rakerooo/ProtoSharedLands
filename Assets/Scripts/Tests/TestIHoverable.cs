@@ -36,4 +36,14 @@ public class TestIHoverable : MonoBehaviour, IHoverable, ISelectable
     {
         mr.material = defaultMaterial;
     }
+
+    public void OnAlternateSelect()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnAlternateDeselect()
+    {
+        throw new NotImplementedException();
+    }
 }

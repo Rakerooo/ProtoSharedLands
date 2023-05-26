@@ -40,6 +40,16 @@ public class SimpleUnit : MonoBehaviour, INavUnit, ISelectable, IHoverable
         throw new System.NotImplementedException();
     }
 
+    public void OnAlternateSelect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnAlternateDeselect()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnHoverDisable()
     {
         rend.material = classicMat;

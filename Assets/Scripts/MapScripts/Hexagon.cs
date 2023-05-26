@@ -57,6 +57,16 @@ namespace MapScripts
             UpdateMat();
         }
 
+        public void OnAlternateSelect()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnAlternateDeselect()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void UpdateMat()
         {
             Debug.Log(hexRenderer);
