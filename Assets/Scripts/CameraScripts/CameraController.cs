@@ -45,7 +45,8 @@ namespace Camera
             private Vector3 rotateStartPosition, rotateCurrentPosition;
             private Quaternion newRotation;
             private Quaternion oldRotation;
-            private bool rotatingKeyboard, rotatingMouse;
+            private bool rotatingKeyboardL, rotatingKeyboardR, rotatingMouse;
+            private bool rotatingKeyboard => rotatingKeyboardL || rotatingKeyboardR;
         #endregion
         #region Zoom attributes
             [Header("Zoom attributes")] [Tooltip("RF")]
@@ -178,19 +179,32 @@ namespace Camera
                     newPosition += rig.right * movementSpeed;
 
                 // Rotation
-                if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)) && !rotatingMouse)
+                if (!rotatingMouse)
                 {
-                    oldRotation = newRotation;
-                    rotatingKeyboard = true;
+                    if (Input.GetKeyDown(KeyCode.Q))
+                    {
+                        oldRotation = newRotation;
+                        rotatingKeyboardL = true;
+                    }
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        oldRotation = newRotation;
+                        rotatingKeyboardR = true;
+                    }
                 }
                 if (Input.GetKey(KeyCode.Q))
                     newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
                 if (Input.GetKey(KeyCode.E))
                     newRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed);
-                if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))
+                if (Input.GetKeyUp(KeyCode.Q))
                 {
-                    newRotation = oldRotation;
-                    rotatingKeyboard = false;
+                    if (!rotatingKeyboardR) newRotation = oldRotation;
+                    rotatingKeyboardL = false;
+                }
+                if (Input.GetKeyUp(KeyCode.E))
+                {
+                    if (!rotatingKeyboardL) newRotation = oldRotation;
+                    rotatingKeyboardR = false;
                 }
                 
                 // Zoom
