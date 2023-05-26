@@ -44,7 +44,8 @@ namespace Camera
 
             private Vector3 rotateStartPosition, rotateCurrentPosition;
             private Quaternion newRotation;
-            private Quaternion oldRotation;
+            private Quaternion baseRotation;
+            private bool rotatingL, rotatingR;
             private bool rotatingKeyboardL, rotatingKeyboardR, rotatingMouse;
             private bool rotatingKeyboard => rotatingKeyboardL || rotatingKeyboardR;
         #endregion
@@ -73,7 +74,7 @@ namespace Camera
             {
                 newPosition = rig.position;
                 newRotation = rig.rotation;
-                oldRotation = newRotation;
+                baseRotation = newRotation;
                 oldZoomAmount = zoomAmount;
                 if (rotationTime == 0) rotationTime = 0.001f;
                 if (zoomTime == 0) zoomTime = 0.001f;
@@ -156,7 +157,7 @@ namespace Camera
                 }
                 if (Input.GetMouseButtonUp(1))
                 {
-                    newRotation = oldRotation;
+                    newRotation = baseRotation;
                     rotatingMouse = false;
                 }
                 
@@ -192,17 +193,17 @@ namespace Camera
                     }
                 }
                 if (Input.GetKey(KeyCode.Q))
-                    newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
-                if (Input.GetKey(KeyCode.E))
                     newRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed);
+                if (Input.GetKey(KeyCode.E))
+                    newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
                 if (Input.GetKeyUp(KeyCode.Q))
                 {
-                    if (!rotatingKeyboardR) newRotation = oldRotation;
+                    if (!rotatingKeyboardR) newRotation = baseRotation;
                     rotatingKeyboardL = false;
                 }
                 if (Input.GetKeyUp(KeyCode.E))
                 {
-                    if (!rotatingKeyboardL) newRotation = oldRotation;
+                    if (!rotatingKeyboardL) newRotation = baseRotation;
                     rotatingKeyboardR = false;
                 }
                 
@@ -222,6 +223,32 @@ namespace Camera
             rig.position = Vector3.SmoothDamp(rig.position, newPosition, ref currentVelocity, movementTime, maxVelocity);
             
             // Rotation
+            var rotationY = newRotation.eulerAngles.y;
+            switch (rotationY)
+            {
+                case > 350:
+                    rotatingL = true;
+                    rotatingR = false;
+                    break;
+                case > 0 and < 10:
+                    rotatingL = false;
+                    rotatingR = true;
+                    break;
+            }
+
+            if (rotatingMouse || rotatingKeyboard)
+            {
+                if (rotatingL)
+                {
+                    if (rotationY < 180) rotationY = 180;
+                }
+                else if (rotatingR)
+                {
+                    if (rotationY > 180) rotationY = 180;
+                }
+            }
+
+            newRotation.eulerAngles = new Vector3(newRotation.eulerAngles.x, rotationY);
             rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime * (rotatingMouse || rotatingKeyboard ? 1 : cancelRotationMultiplier));
             
             // Zoom
