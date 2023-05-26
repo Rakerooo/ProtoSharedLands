@@ -7,6 +7,7 @@ namespace MapScripts
     [RequireComponent(typeof(HexRenderer))]
     public class Hexagon : MonoBehaviour, IHoverable, ISelectable
     {
+        [SerializeField] UnitNavigationService unitNavigationService;
         public Vector2Int positionInGrid { get; private set; }
         private Region region;
         private HexagonType type;
@@ -72,12 +73,18 @@ namespace MapScripts
 
         public void OnAlternateSelect()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
+            if(unitNavigationService != null)
+            {
+                unitNavigationService.HexSelected(this);
+            }
         }
 
         public void OnAlternateDeselect()
         {
-            throw new System.NotImplementedException();
+            //Pas besoin
+
+            //throw new System.NotImplementedException();
         }
 
         private void UpdateMat()
