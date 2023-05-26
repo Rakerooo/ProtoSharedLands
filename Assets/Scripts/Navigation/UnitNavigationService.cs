@@ -12,7 +12,7 @@ public class UnitNavigationService : MonoBehaviour
     {
         if(currentSelected != null)
         {
-            SimpleUnit previous = (SimpleUnit)unit;
+            SimpleUnit previous = (SimpleUnit)currentSelected;
             previous.OnDeselectItem();
         }
 
@@ -37,7 +37,8 @@ public class UnitNavigationService : MonoBehaviour
         if(currentSelected != null)
         {
             currentSelected.MoveToDestination(hex.transform.position);
-
+            SimpleUnit unit = (SimpleUnit)currentSelected;
+            unit.OnDeselectItem();
             currentSelected = null;
         }
     }
