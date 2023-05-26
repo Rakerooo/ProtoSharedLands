@@ -1,5 +1,4 @@
 using MapScripts.Grid;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MapScripts
@@ -22,8 +21,9 @@ namespace MapScripts
             if (transform.childCount == 0)
             {
                 var border = new GameObject("Border").gameObject;
-                border.transform.position = transform.position;
-                border.transform.SetParent(transform);
+                var hexagonTransform = transform;
+                border.transform.position = hexagonTransform.position;
+                border.transform.SetParent(hexagonTransform);
                 hexRendererOut = border.AddComponent<HexRenderer>();
             }
             else
