@@ -33,9 +33,10 @@ public class GameManager : MonoBehaviour
     }
     public void SetCanPlay(bool value)
     {
-        Debug.Log($"Can play ? {value}");
         canPlay = value;
-    }public bool GetCanPlay()
+    }
+    
+    public bool GetCanPlay()
     {
         return canPlay;
     }
