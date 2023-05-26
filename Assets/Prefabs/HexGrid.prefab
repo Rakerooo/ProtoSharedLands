@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 50, y: 50}
-  hexMats: {fileID: 11400000, guid: 742e04e3c1725cb498bae646a92387cf, type: 2}
-  innerSize: 0
+  hexColors: {fileID: 11400000, guid: 742e04e3c1725cb498bae646a92387cf, type: 2}
+  innerSize: 65
   outerSize: 75
   height: 1
   isFlatTopped: 0
