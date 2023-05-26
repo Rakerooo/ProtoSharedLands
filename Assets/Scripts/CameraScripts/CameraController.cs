@@ -236,7 +236,6 @@ namespace Camera
                     break;
             }
 
-            Debug.LogError(rotationY);
             if (rotatingMouse || rotatingKeyboard)
             {
                 if (rotatingL)
