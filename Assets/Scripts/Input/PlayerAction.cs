@@ -44,6 +44,15 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlternateSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""dcbd177b-e37c-4e9b-bbec-08dac187de80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +75,17 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55b112a8-df38-4b4d-a72f-17ff96fce4c3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AlternateSelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -655,6 +675,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
+        m_Player_AlternateSelect = m_Player.FindAction("AlternateSelect", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -730,12 +751,14 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Cancel;
+    private readonly InputAction m_Player_AlternateSelect;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
         public PlayerActions(@PlayerAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
+        public InputAction @AlternateSelect => m_Wrapper.m_Player_AlternateSelect;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -751,6 +774,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @AlternateSelect.started += instance.OnAlternateSelect;
+            @AlternateSelect.performed += instance.OnAlternateSelect;
+            @AlternateSelect.canceled += instance.OnAlternateSelect;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -761,6 +787,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @AlternateSelect.started -= instance.OnAlternateSelect;
+            @AlternateSelect.performed -= instance.OnAlternateSelect;
+            @AlternateSelect.canceled -= instance.OnAlternateSelect;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -945,6 +974,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnAlternateSelect(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
