@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace MapScripts
@@ -8,12 +9,12 @@ namespace MapScripts
 
         public void SetSelectedHexagon(Hexagon hexagon)
         {
-            if (IsSelectedHexagon(hexagon))
+            if (SelectedHexagon)
             {
-                hexagon.OnDeselectItem();
-                SelectedHexagon = null;
+                SelectedHexagon.OnDeselectItem();
+                SelectedHexagon = IsSelectedHexagon(hexagon) ? null : hexagon;
             }
-            else {SelectedHexagon = hexagon;}
+            else SelectedHexagon = hexagon;
         }
 
         public bool IsSelectedHexagon(Hexagon hexagon)

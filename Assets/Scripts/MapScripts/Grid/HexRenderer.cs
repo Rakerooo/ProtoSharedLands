@@ -136,9 +136,9 @@ namespace MapScripts.Grid
             return new Vector3(_size * Mathf.Cos(radAngle), _height, _size * Mathf.Sin(radAngle));
         }
 
-        public void SetMaterial(Material mat)
+        public void SetColor(Color c)
         {
-            meshRenderer.material = mat;
+            meshRenderer.material.color = Color.Lerp(GameManager.instance.HexColors.basic, c, 0.5f);
         }
     }
 }

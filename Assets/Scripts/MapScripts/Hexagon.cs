@@ -6,7 +6,7 @@ namespace MapScripts
     [RequireComponent(typeof(HexRenderer))]
     public class Hexagon : MonoBehaviour, IHoverable, ISelectable
     {
-        private Vector2Int positionInGrid;
+        public Vector2Int positionInGrid { get; private set; }
         private Region region;
         private HexagonType type;
         private HexRenderer hexRenderer;
@@ -17,6 +17,10 @@ namespace MapScripts
         private void Awake()
         {
             hexRenderer = GetComponent<HexRenderer>();
+        }
+        
+        private void Start()
+        {
             if (GameManager.instance) map = GameManager.instance.Map;
         }
 
@@ -43,8 +47,8 @@ namespace MapScripts
         public void OnSelectItem()
         {
             selected = true;
-            map.SetSelectedHexagon(this);
             UpdateMat();
+            map.SetSelectedHexagon(this);
         }
 
         public void OnDeselectItem()
@@ -55,9 +59,11 @@ namespace MapScripts
 
         private void UpdateMat()
         {
-            if (selected) hexRenderer.SetMaterial(GameManager.instance.HexMats.selected);
-            else if (hovered) hexRenderer.SetMaterial(GameManager.instance.HexMats.hovered);
-            else hexRenderer.SetMaterial(GameManager.instance.HexMats.basic);
+            Debug.Log(hexRenderer);
+            Debug.Log(GameManager.instance);
+            if (selected) hexRenderer.SetColor(GameManager.instance.HexColors.selected);
+            else if (hovered) hexRenderer.SetColor(GameManager.instance.HexColors.hovered);
+            else hexRenderer.SetColor(GameManager.instance.HexColors.basic);
         }
     }
 }
