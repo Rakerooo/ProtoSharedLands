@@ -36,6 +36,7 @@ namespace Proto2.Map
                 {
                     selectedCell = cell;
                     selectedCell.UpdatePathfinding(cells);
+                    DebugDistances();
                 }
                 else
                 {

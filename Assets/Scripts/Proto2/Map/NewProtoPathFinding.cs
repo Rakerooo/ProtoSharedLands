@@ -1,53 +1,64 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Proto2.Map
 {
     public static class NewProtoPathFinding
     {
-        private static readonly List<NewProtoCell> UnvisitedNodes = new();
-        private static readonly List<NewProtoCell> AllCells = new();
+        private static readonly List<NewProtoCell> UnvisitedCells = new();
+        private static readonly List<NewProtoCell> FilteredNeighbours = new();
 
-        public static void UpdatePathfinding(this NewProtoCell baseCell, IEnumerable<NewProtoCell> cells)
+        public static void UpdatePathfinding(this NewProtoCell baseCell, List<NewProtoCell> cells)
         {
-            DijkstraAlgorithmPoints(cells, baseCell);
+            DijkstraAlgorithm1(cells, baseCell);
         }
         
-        private static void DijkstraAlgorithmPoints(IEnumerable<NewProtoCell> cells, NewProtoCell baseCell)
+        //https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
+        
+        private static void DijkstraAlgorithm1(IReadOnlyCollection<NewProtoCell> cells, NewProtoCell baseCell)
         {
+            UnvisitedCells.Clear();
+            UnvisitedCells.AddRange(cells);
+            
             foreach (var cell in cells.Where(cell => !cell.Equals(baseCell)))
             {
                 cell.SetDistance(float.MaxValue);
                 cell.ClearPositionsFromStart();
             }
             
-            UnvisitedNodes.Clear();
-            UnvisitedNodes.Add(baseCell);
-            
             baseCell.SetDistance(0);
             baseCell.AddPositionFromStart(baseCell.Node.position);
             
-            while (UnvisitedNodes.Count > 0)
+            var currentCell = baseCell;
+            
+            while (currentCell != null)
             {
-                var currentCell = GetClosestCell(UnvisitedNodes);
-                UnvisitedNodes.Remove(currentCell);
+                UnvisitedCells.Remove(currentCell);
+                FilteredNeighbours.Clear();
 
-                foreach (var neighbour in currentCell.Neighbours)
+                var cell = currentCell;
+                foreach (var unvisitedCell in from unvisitedCell in UnvisitedCells from neighbour in cell.Neighbours.Where(neighbour => unvisitedCell.Equals(neighbour.Cell)) select unvisitedCell)
                 {
-                    neighbour.SetDistance(currentCell.MovementFactor / 2f + neighbour.Cell.MovementFactor / 2f);
-                    var newTheoreticDistance = currentCell.Distance + neighbour.Distance;
-
-                    if (!(newTheoreticDistance < neighbour.Cell.Distance)) continue;
-                    neighbour.Cell.SetDistance(newTheoreticDistance);
-                    UnvisitedNodes.Add(neighbour.Cell);
-                    neighbour.Cell.SetPositionsFromStart(currentCell.PositionsFromStart);
-                    neighbour.Cell.AddPositionFromStart(neighbour.Cell.Node.position);
+                    FilteredNeighbours.Add(unvisitedCell);
                 }
+
+                foreach (var neighbour in FilteredNeighbours)
+                {
+                    var newTheoreticDistance = currentCell.Distance + currentCell.MovementFactor / 2f + neighbour.MovementFactor / 2f;
+
+                    if (!(newTheoreticDistance < neighbour.Distance)) continue;
+                    neighbour.SetDistance(newTheoreticDistance);
+                    neighbour.SetPositionsFromStart(currentCell.PositionsFromStart);
+                    neighbour.AddPositionFromStart(neighbour.Node.position);
+                }
+
+                if (UnvisitedCells.Count == 0) break;
+
+                currentCell = GetClosestCell(UnvisitedCells);
             }
         }
         
-        private static void DijkstraAlgorithmDistance(IEnumerable<NewProtoCell> cells, NewProtoCell baseCell)
+        private static void DijkstraAlgorithm(IEnumerable<NewProtoCell> cells, NewProtoCell baseCell)
         {
             foreach (var cell in cells.Where(cell => !cell.Equals(baseCell)))
             {
@@ -56,12 +67,12 @@ namespace Proto2.Map
             
             baseCell.SetDistance(0);
             
-            UnvisitedNodes.Clear();
-            UnvisitedNodes.Add(baseCell);
-            while (UnvisitedNodes.Count > 0)
+            UnvisitedCells.Clear();
+            UnvisitedCells.Add(baseCell);
+            while (UnvisitedCells.Count > 0)
             {
-                var currentNode = GetClosestCell(UnvisitedNodes);
-                UnvisitedNodes.Remove(currentNode);
+                var currentNode = GetClosestCell(UnvisitedCells);
+                UnvisitedCells.Remove(currentNode);
 
                 foreach (var neighbour in currentNode.Neighbours)
                 {
@@ -70,7 +81,7 @@ namespace Proto2.Map
 
                     if (!(newTheoreticDistance < neighbour.Cell.Distance)) continue;
                     neighbour.Cell.SetDistance(newTheoreticDistance);
-                    UnvisitedNodes.Add(neighbour.Cell);
+                    UnvisitedCells.Add(neighbour.Cell);
                 }
             }
         }
