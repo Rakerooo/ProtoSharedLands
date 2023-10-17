@@ -643,6 +643,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 876370637756416992, guid: 4d61a2884cb92fd44bb00310c5fc2494,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 876370637756416992, guid: 4d61a2884cb92fd44bb00310c5fc2494,
+        type: 3}
+      propertyPath: m_DecalLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558836810243110268, guid: 4d61a2884cb92fd44bb00310c5fc2494,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707582195913002328, guid: 4d61a2884cb92fd44bb00310c5fc2494,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884879763252369953, guid: 4d61a2884cb92fd44bb00310c5fc2494,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8418539896244034248, guid: 4d61a2884cb92fd44bb00310c5fc2494,
         type: 3}
       propertyPath: m_Name
