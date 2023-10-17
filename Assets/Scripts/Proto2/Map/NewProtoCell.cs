@@ -18,6 +18,7 @@ namespace Proto2.Map
         public NewProtoBiotopes Biotope => biotope;
         public float MovementFactor => movementFactor;
         public float Distance { get; private set; }
+        public List<Vector3> PositionsFromStart { get; private set; } = new();
 
         private NewProtoMap map;
         private Material material;
@@ -46,6 +47,18 @@ namespace Proto2.Map
         public void SetDistance(float newDistance)
         {
             Distance = newDistance;
+        }
+        public void AddPositionFromStart(Vector3 newPosition)
+        {
+            PositionsFromStart.Add(newPosition);
+        }
+        public void SetPositionsFromStart(List<Vector3> newPositions)
+        {
+            PositionsFromStart = newPositions;
+        }
+        public void ClearPositionsFromStart()
+        {
+            PositionsFromStart.Clear();
         }
         
         private void UpdateSelected()

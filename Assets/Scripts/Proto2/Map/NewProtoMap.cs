@@ -7,14 +7,12 @@ namespace Proto2.Map
     public class NewProtoMap : MonoBehaviour
     {
         [SerializeField] private NewProtoPathRenderer pathRenderer;
-        public int NbCells { get; private set; }
         private NewProtoCell selectedCell, secondarySelectedCell;
         private List<NewProtoCell> cells;
 
         private void Start()
         {
             cells = FindObjectsOfType<NewProtoCell>().ToList();
-            NbCells = cells.Count;
             pathRenderer.SetLine(new List<Vector3>());
         }
         
@@ -37,14 +35,13 @@ namespace Proto2.Map
                 if (selectedCell == null)
                 {
                     selectedCell = cell;
-                    selectedCell.SetDistances(cells);
-                    DebugDistances();
+                    selectedCell.UpdatePathfinding(cells);
                 }
                 else
                 {
                     ResetSecondaryCell();
                     secondarySelectedCell = cell;
-                    //pathRenderer.SetLine(selectedCell.GetPathToOtherCell(cell));
+                    pathRenderer.SetLine(secondarySelectedCell.PositionsFromStart);
                 }
             }
         }
@@ -56,6 +53,5 @@ namespace Proto2.Map
                 Debug.Log($"{cell.gameObject.name} : {cell.Distance}");
             }
         }
-
     }
 }
