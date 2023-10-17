@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Proto2.Map
@@ -8,11 +9,19 @@ namespace Proto2.Map
         [SerializeField] private NewProtoPathRenderer pathRenderer;
         public int NbCells { get; private set; }
         private NewProtoCell selectedCell, secondarySelectedCell;
+        private List<NewProtoCell> cells;
 
         private void Start()
         {
-            var cells = FindObjectsOfType<NewProtoCell>();
-            NbCells = cells.Length;
+            cells = FindObjectsOfType<NewProtoCell>().ToList();
+            NbCells = cells.Count;
+            pathRenderer.SetLine(new List<Vector3>());
+        }
+        
+        private void ResetSecondaryCell()
+        {
+            if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
+            secondarySelectedCell = null;
         }
 
         public void UpdateSelected(NewProtoCell cell)
@@ -25,21 +34,28 @@ namespace Proto2.Map
             }
             else
             {
-                if (selectedCell == null) selectedCell = cell;
+                if (selectedCell == null)
+                {
+                    selectedCell = cell;
+                    selectedCell.SetDistances();
+                    DebugDistances();
+                }
                 else
                 {
                     ResetSecondaryCell();
                     secondarySelectedCell = cell;
-                    selectedCell.SetDistances();
-                    pathRenderer.SetLine(selectedCell.GetPathToOtherCell(cell));
+                    //pathRenderer.SetLine(selectedCell.GetPathToOtherCell(cell));
                 }
             }
         }
 
-        private void ResetSecondaryCell()
+        private void DebugDistances()
         {
-            if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
-            secondarySelectedCell = null;
+            foreach (var cell in cells)
+            {
+                Debug.Log($"{cell.gameObject.name} : {cell.Distance}");
+            }
         }
+
     }
 }
