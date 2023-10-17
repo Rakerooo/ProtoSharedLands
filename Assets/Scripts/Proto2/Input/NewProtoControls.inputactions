@@ -1,0 +1,34 @@
+{
+    "name": "NewProtoControls",
+    "maps": [
+        {
+            "name": "Play",
+            "id": "690faa1c-0d0d-4ec3-ac1d-e90b1301cfb6",
+            "actions": [
+                {
+                    "name": "MainClick",
+                    "type": "Button",
+                    "id": "8f151a2d-a6f4-49ca-812f-2b24dfba14b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "527898bc-9d13-46e4-9466-2894a59e6d09",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MainClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

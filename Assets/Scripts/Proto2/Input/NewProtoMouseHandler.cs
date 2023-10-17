@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Proto2.Input
@@ -15,6 +16,7 @@ namespace Proto2.Input
     
         private void Update()
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
             var ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             Physics.Raycast(ray, out var hit, Mathf.Infinity, hoverableMask);
             if (hit.collider) {
