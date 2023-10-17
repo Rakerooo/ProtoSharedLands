@@ -37,7 +37,7 @@ namespace Proto2.Map
                 if (selectedCell == null)
                 {
                     selectedCell = cell;
-                    selectedCell.SetDistances();
+                    selectedCell.SetDistances(cells);
                     DebugDistances();
                 }
                 else
