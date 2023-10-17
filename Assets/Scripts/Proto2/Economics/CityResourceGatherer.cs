@@ -72,4 +72,8 @@ public class CityResourceGatherer : MonoBehaviour
     {
         exploitationMode = !exploitationMode;
     }
+    public void SetExploitation(bool value)
+    {
+        exploitationMode = value;
+    }
 }
