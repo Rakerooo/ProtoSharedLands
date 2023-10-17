@@ -19,6 +19,11 @@ public class CityBuildingHandler : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _cityManager.GetTownUIController().onPlusbatiment.AddListener(()=>Build(buildableBuildings[0]));
+    }
+
     public void SetCityManager(CityManager pCityManager)
     {
         _cityManager = pCityManager;
@@ -29,15 +34,27 @@ public class CityBuildingHandler : MonoBehaviour
         return currentBuildings;
     }
 
-    public void Build(Building building)
+    public bool Build(Building building)
     {
-        if (building.GetCost() <  PlayerResourceManager.instance.GetCurrentResource())
+        if (building.GetCost() <=  PlayerResourceManager.instance.GetCurrentResource())
         {
-            Debug.Log("Mettre le code de construction de bâtiment ici");
+            if (buildableBuildings.Count > 0)
+            {
+                currentBuildings.Add(Instantiate(buildableBuildings[0]));
+                PlayerResourceManager.instance.RemoveResource(building.GetCost());
+                _cityManager.GetTownUIController().FillBuildingUI();
+                _cityManager.UpdateUI();
+            }
+            else
+            {
+                Debug.Log("Pas de building dans la liste");
+            }
+            return true;
         }
         else
         {
             Debug.Log("Pas assez de ressource");
+            return false;
         }
     }
     

@@ -46,6 +46,7 @@ public class NewProto_UITownController : MonoBehaviour
     {
         ToggleWindow(true);
     }
+    
 
     public void SetTownName(string TownName)
     {
@@ -108,10 +109,13 @@ public class NewProto_UITownController : MonoBehaviour
 
     public void CreateBatiment()
     {
+        onPlusbatiment?.Invoke();
+    }
+
+    public void FillBuildingUI()
+    {
         batimentButton.gameObject.SetActive(true);
         plusSignButton.gameObject.SetActive(false);
-
-        onPlusbatiment?.Invoke();
     }
     
     public void ToggleWindow(bool toggle)

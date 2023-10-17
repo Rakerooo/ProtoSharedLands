@@ -54,7 +54,7 @@ public class NewProto_UIRegionController : MonoBehaviour
         }
     }
 
-    public void UpdateExplotationRate(float rate)
+    public void UpdateExploitationRate(float rate)
     {
         exploitationBar.fillAmount = rate;
     }

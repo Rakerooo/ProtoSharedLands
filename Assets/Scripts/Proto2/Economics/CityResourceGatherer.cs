@@ -72,6 +72,7 @@ public class CityResourceGatherer : MonoBehaviour
             PlayerResourceManager.instance.AddResource(resourceGathered);
             _regionResourceHandler.RemoveFromStock(tmpExploitationValue);
             _cityManager.UpdateUI();
+            _regionResourceHandler.UpdateUI();
         }
     }
 

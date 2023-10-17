@@ -44,4 +44,9 @@ public class CityManager : MonoBehaviour
         _UIController.SetHardExploitationGain((int)_resourceGatherer.GetExploitationValue(), ResourcesTypes.Ore);
         _UIController.SetHardExploitToggle(_resourceGatherer.GetExploitationMode());
     }
+
+    public NewProto_UITownController GetTownUIController()
+    {
+        return _UIController;
+    }
 }
