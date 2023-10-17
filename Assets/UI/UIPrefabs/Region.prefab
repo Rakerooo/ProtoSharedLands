@@ -960,11 +960,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c3e126ccbff714a8f286e7244089a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionName: {fileID: 0}
-  oreGain: {fileID: 0}
-  wheatGain: {fileID: 0}
-  clayGain: {fileID: 0}
-  exploitationBar: {fileID: 0}
+  regionName: {fileID: 3754146070942394561}
+  oreGain: {fileID: 2989693116876464138}
+  wheatGain: {fileID: 8839638108254057722}
+  clayGain: {fileID: 1661117189011319224}
+  exploitationBar: {fileID: 6849127843775071642}
   onHardExploitToggle:
     m_PersistentCalls:
       m_Calls: []
