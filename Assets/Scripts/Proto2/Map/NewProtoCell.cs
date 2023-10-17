@@ -36,7 +36,6 @@ namespace Proto2.Map
         private void SetHover(bool isHovered)
         {
             hovered = isHovered;
-            Debug.Log($"Is {gameObject.name} hovered : {hovered}");
             UpdateVisual();
         }
         public void SetSelected(bool isSelected)

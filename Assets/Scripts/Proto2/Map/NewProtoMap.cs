@@ -17,23 +17,29 @@ namespace Proto2.Map
 
         public void UpdateSelected(NewProtoCell cell)
         {
-            if (cell == null)
+            if (cell == null || cell.Equals(selectedCell))
             {
                 pathRenderer.SetLine(new List<Vector3>());
-                return;
+                selectedCell = null;
+                ResetSecondaryCell();
             }
-            if (cell.Equals(selectedCell)) selectedCell = null;
             else
             {
                 if (selectedCell == null) selectedCell = cell;
                 else
                 {
-                    if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
+                    ResetSecondaryCell();
                     secondarySelectedCell = cell;
                     selectedCell.SetDistances();
                     pathRenderer.SetLine(selectedCell.GetPathToOtherCell(cell));
                 }
             }
+        }
+
+        private void ResetSecondaryCell()
+        {
+            if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
+            secondarySelectedCell = null;
         }
     }
 }
