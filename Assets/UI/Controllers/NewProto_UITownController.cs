@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,14 +32,20 @@ public class NewProto_UITownController : MonoBehaviour
     [SerializeField] TMP_Text exploitWheatGain;
     [SerializeField] TMP_Text standardClayGain;
     [SerializeField] TMP_Text exploitClayGain;
+    [SerializeField] private Toggle hardExploitToggle;
 
-    //Bâtiments
+    //Bï¿½timents
     [Header("Batiment Section")]
     [SerializeField] RectTransform plusSignButton;
     [SerializeField] RectTransform batimentButton;
 
     [Space(10f)]
     public UnityEvent onPlusbatiment;
+
+    private void Start()
+    {
+        ToggleWindow(true);
+    }
 
     public void SetTownName(string TownName)
     {
@@ -94,6 +101,11 @@ public class NewProto_UITownController : MonoBehaviour
         }
     }
 
+    public void SetHardExploitToggle(bool value)
+    {
+        hardExploitToggle.isOn = value;
+    }
+
     public void CreateBatiment()
     {
         batimentButton.gameObject.SetActive(true);
@@ -101,7 +113,7 @@ public class NewProto_UITownController : MonoBehaviour
 
         onPlusbatiment?.Invoke();
     }
-
+    
     public void ToggleWindow(bool toggle)
     {
         StopAllCoroutines();

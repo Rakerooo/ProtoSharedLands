@@ -38,6 +38,7 @@ public class TurnManager : MonoBehaviour
             currentTurn++;
         });
     }
+    
     public UnityEvent GetStartPlayerTurnEvent()
     {
         return startPlayerTurnEvent;
@@ -54,7 +55,8 @@ public class TurnManager : MonoBehaviour
     {
         return endTitanTurnEvent;
     }
-
+    
+    [ContextMenu("Start Turn")]
     public void StartPlayerTurn()
     {
         startPlayerTurnEvent.Invoke();

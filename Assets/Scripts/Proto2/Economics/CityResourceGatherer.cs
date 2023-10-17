@@ -33,14 +33,20 @@ public class CityResourceGatherer : MonoBehaviour
         _cityManager = pCityManager;
     }
     
-    public float GetProductionValue(IEnumerable<Building> buildings)
+    public float GetProductionValue()
     {
-        return buildings.Sum(building => building.GetProductionValue());
+        
+        return _cityManager.GetBuildingHandler().GetCurrentBuildings().Sum(building => building.GetProductionValue());
     }
 
-    public float GetExploitationValue(IEnumerable<Building> buildings)
+    public float GetExploitationValue()
     {
-        return buildings.Sum(building => building.GetExploitationValue());
+        return _cityManager.GetBuildingHandler().GetCurrentBuildings().Sum(building => building.GetExploitationValue());
+    }
+
+    public bool GetExploitationMode()
+    {
+        return exploitationMode;
     }
 
     public void GatherResources()
@@ -48,23 +54,24 @@ public class CityResourceGatherer : MonoBehaviour
         IEnumerable<Building> buildings = _cityManager.GetBuildingHandler().GetCurrentBuildings();
         if (!exploitationMode)
         {
-            var tmpResource = GetProductionValue(buildings) + _regionResourceHandler.GetProd();
+            var tmpResource = GetProductionValue() + _regionResourceHandler.GetProd();
             Debug.Log($"Region is not exploited. {tmpResource} gathered by city");
             PlayerResourceManager.instance.AddResource(tmpResource);
         }
         else
         {
-            var tmpExploitationValue = GetExploitationValue(buildings);
+            var tmpExploitationValue = GetExploitationValue();
             if (tmpExploitationValue > _regionResourceHandler.GetCurrentResourceStock())
             {
                 tmpExploitationValue = _regionResourceHandler.GetCurrentResourceStock();
             }
 
-            var resourceGathered = GetProductionValue(buildings) + _regionResourceHandler.GetProd() +
+            var resourceGathered = GetProductionValue() + _regionResourceHandler.GetProd() +
                                    tmpExploitationValue;
             Debug.Log($"Region is exploited. {resourceGathered} gathered by city. Region stock decreased by {tmpExploitationValue}. Region new stock : {_regionResourceHandler.GetCurrentResourceStock()-tmpExploitationValue}");
             PlayerResourceManager.instance.AddResource(resourceGathered);
             _regionResourceHandler.RemoveFromStock(tmpExploitationValue);
+            _cityManager.UpdateUI();
         }
     }
 

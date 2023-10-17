@@ -7,6 +7,7 @@ public class CityManager : MonoBehaviour
 {
     [SerializeField] private CityResourceGatherer _resourceGatherer;
     [SerializeField] private CityBuildingHandler _buildingHandler;
+    [SerializeField] private NewProto_UITownController _UIController;
 
     private void Awake()
     {
@@ -21,7 +22,12 @@ public class CityManager : MonoBehaviour
         }
         
     }
-    
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     public CityResourceGatherer GetResourceGatherer()
     {
         return _resourceGatherer;
@@ -30,5 +36,12 @@ public class CityManager : MonoBehaviour
     public CityBuildingHandler GetBuildingHandler()
     {
         return _buildingHandler;
+    }
+
+    public void UpdateUI()
+    {
+        _UIController.SetNormalExploitationGain((int)_resourceGatherer.GetProductionValue(), ResourcesTypes.Ore);
+        _UIController.SetHardExploitationGain((int)_resourceGatherer.GetExploitationValue(), ResourcesTypes.Ore);
+        _UIController.SetHardExploitToggle(_resourceGatherer.GetExploitationMode());
     }
 }

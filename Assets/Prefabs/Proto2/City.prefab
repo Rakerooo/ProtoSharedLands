@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceGatherer: {fileID: 7230446060190491051}
   _buildingHandler: {fileID: 277420690947748613}
+  _UIController: {fileID: 0}
 --- !u!114 &277420690947748613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d2d3ed80c4d6b4d8320c373443ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildableBuildings: []
-  currentBuildings: []
+  buildableBuildings:
+  - {fileID: 6218305871026229092, guid: 3e73fa254a146c942afe2c3de41c90a2, type: 3}
+  currentBuildings:
+  - {fileID: 0}
 --- !u!114 &7230446060190491051
 MonoBehaviour:
   m_ObjectHideFlags: 0
