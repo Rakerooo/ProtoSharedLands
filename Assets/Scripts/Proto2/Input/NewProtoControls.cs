@@ -29,12 +29,12 @@ public partial class @NewProtoControls: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""MainClick"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""8f151a2d-a6f4-49ca-812f-2b24dfba14b6"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -50,6 +50,34 @@ public partial class @NewProtoControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""64fb454f-5efc-4c78-ad84-ce5820008083"",
+            ""actions"": [
+                {
+                    ""name"": ""Main Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b9b11e6a-10cb-4127-8ad6-fc0e715d1099"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ac8c1bf7-dc66-4418-bbf9-33ab279b4e7c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Main Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -57,6 +85,9 @@ public partial class @NewProtoControls: IInputActionCollection2, IDisposable
         // Play
         m_Play = asset.FindActionMap("Play", throwIfNotFound: true);
         m_Play_MainClick = m_Play.FindAction("MainClick", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_MainClick = m_UI.FindAction("Main Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,7 +191,57 @@ public partial class @NewProtoControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayActions @Play => new PlayActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_MainClick;
+    public struct UIActions
+    {
+        private @NewProtoControls m_Wrapper;
+        public UIActions(@NewProtoControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MainClick => m_Wrapper.m_UI_MainClick;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @MainClick.started += instance.OnMainClick;
+            @MainClick.performed += instance.OnMainClick;
+            @MainClick.canceled += instance.OnMainClick;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @MainClick.started -= instance.OnMainClick;
+            @MainClick.performed -= instance.OnMainClick;
+            @MainClick.canceled -= instance.OnMainClick;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayActions
+    {
+        void OnMainClick(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
     {
         void OnMainClick(InputAction.CallbackContext context);
     }
