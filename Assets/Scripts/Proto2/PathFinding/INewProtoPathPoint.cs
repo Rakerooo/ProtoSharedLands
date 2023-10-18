@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Proto2.PathFinding
 {
-    public class NewProtoPathPoint<T> : MonoBehaviour where T : NewProtoPathPoint<T>
+    public abstract class NewProtoPathPoint<T> : MonoBehaviour where T : NewProtoPathPoint<T>
     {
         [SerializeField] private List<T> neighbours;
         [SerializeField] private Transform node;
