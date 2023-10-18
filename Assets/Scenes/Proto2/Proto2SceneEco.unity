@@ -1196,6 +1196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455694646}
   - component: {fileID: 455694647}
+  - component: {fileID: 455694648}
   m_Layer: 0
   m_Name: Bleu
   m_TagString: Untagged
@@ -1239,6 +1240,23 @@ MonoBehaviour:
   cells:
   - {fileID: 1279301225}
   - {fileID: 122295185}
+--- !u!114 &455694648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455694645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 4
+  currentResourceStock: 17
+  maxResourceStock: 17
+  _UIController: {fileID: 981751350}
 --- !u!1 &465686547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,6 +2022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926493767}
   - component: {fileID: 926493768}
+  - component: {fileID: 926493769}
   m_Layer: 0
   m_Name: Rouge
   m_TagString: Untagged
@@ -2048,6 +2067,23 @@ MonoBehaviour:
   cells:
   - {fileID: 87515809}
   - {fileID: 2058158978}
+--- !u!114 &926493769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926493766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 3
+  currentResourceStock: 14
+  maxResourceStock: 14
+  _UIController: {fileID: 981751350}
 --- !u!1001 &981751347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3033,6 +3069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1654613694}
   - component: {fileID: 1654613695}
+  - component: {fileID: 1654613696}
   m_Layer: 0
   m_Name: Vert
   m_TagString: Untagged
@@ -3076,6 +3113,23 @@ MonoBehaviour:
   cells:
   - {fileID: 1878594960}
   - {fileID: 1415206559}
+--- !u!114 &1654613696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654613693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 6
+  currentResourceStock: 19
+  maxResourceStock: 19
+  _UIController: {fileID: 981751350}
 --- !u!1 &1687446833
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,6 +3627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992184967}
   - component: {fileID: 1992184968}
+  - component: {fileID: 1992184969}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -3618,6 +3673,23 @@ MonoBehaviour:
   - {fileID: 465686548}
   - {fileID: 747629001}
   - {fileID: 434010597}
+--- !u!114 &1992184969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992184966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 5
+  currentResourceStock: 15
+  maxResourceStock: 21
+  _UIController: {fileID: 981751350}
 --- !u!1 &2004950147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,7 +4035,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7210323795769435937}
+        m_TargetAssemblyTypeName: Proto2.Input.NewProtoMouseHandler, Assembly-CSharp
+        m_MethodName: OnMainClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8098ec40-fb8e-402f-8d5c-69af867ce43b
     m_ActionName: Player/Select[/Mouse/leftButton]
   - m_PersistentCalls:
