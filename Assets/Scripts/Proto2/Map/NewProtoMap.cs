@@ -13,6 +13,7 @@ namespace Proto2.Map
         private void Start()
         {
             cells = FindObjectsOfType<NewProtoCell>().ToList();
+            Debug.Log(cells.Count);
             pathRenderer.SetLine(new List<Vector3>());
         }
         
@@ -36,13 +37,13 @@ namespace Proto2.Map
                 {
                     selectedCell = cell;
                     selectedCell.UpdatePathfinding(cells);
-                    DebugDistances();
                 }
                 else
                 {
                     ResetSecondaryCell();
                     secondarySelectedCell = cell;
-                    pathRenderer.SetLine(secondarySelectedCell.PositionsFromStart);
+                    selectedCell.PrintDijkstra(cells);
+                    pathRenderer.SetLine(selectedCell.GetFullPath(secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
                 }
             }
         }

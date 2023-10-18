@@ -23,7 +23,6 @@ namespace Proto2.Map
 
         public void SetLine(List<Vector3> positions)
         {
-            Debug.Log(positions.Count);
             lineRenderer.positionCount = positions.Count;
             lineRenderer.SetPositions(positions.ToArray());
         }
