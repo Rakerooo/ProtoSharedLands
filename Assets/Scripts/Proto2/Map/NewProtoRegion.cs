@@ -7,6 +7,7 @@ namespace Proto2.Map
     public class NewProtoRegion : NewProtoPathPoint<NewProtoRegion>
     {
         [SerializeField] private List<NewProtoCell> cells;
+        [SerializeField] private RegionResourceHandler resourceHandler;
 
         public List<NewProtoCell> Cells => cells;
 
@@ -16,6 +17,11 @@ namespace Proto2.Map
             {
                 cell.SetRegion(this);
             }
+        }
+
+        public void UpdateResourceHandlerUI()
+        {
+            resourceHandler.UpdateUI();
         }
     }
 }

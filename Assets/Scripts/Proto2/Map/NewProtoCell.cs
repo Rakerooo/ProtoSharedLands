@@ -19,7 +19,7 @@ namespace Proto2.Map
         private void Start()
         {
             map = FindObjectOfType<NewProtoMap>();
-            
+            if (map == null) Debug.LogError("No map in the scene !");
             UpdateVisual();
         }
 
@@ -42,6 +42,7 @@ namespace Proto2.Map
         {
             SetSelected(!selected);
             map.UpdateSelected(this);
+            if (selected) Region.UpdateResourceHandlerUI();
         }
         private void UpdateVisual()
         {
