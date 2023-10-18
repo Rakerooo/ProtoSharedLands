@@ -9,5 +9,13 @@ namespace Proto2.Map
         [SerializeField] private List<NewProtoCell> cells;
 
         public List<NewProtoCell> Cells => cells;
+
+        private void Start()
+        {
+            foreach (var cell in Cells)
+            {
+                cell.SetRegion(this);
+            }
+        }
     }
 }
