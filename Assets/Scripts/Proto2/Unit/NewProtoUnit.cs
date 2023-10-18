@@ -1,19 +1,16 @@
+using Proto2.PathFinding;
 using UnityEngine;
 
 namespace Proto2.Unit
 {
-    public abstract class NewProtoUnit : MonoBehaviour
+    public abstract class NewProtoUnit<T> : MonoBehaviour where T : NewProtoPathPoint<T>
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        [SerializeField] private T startPos;
+        private T currentPos;
 
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
-        
+            currentPos = startPos;
         }
     }
 }

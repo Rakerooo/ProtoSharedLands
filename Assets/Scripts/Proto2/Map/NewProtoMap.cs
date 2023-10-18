@@ -41,8 +41,8 @@ namespace Proto2.Map
                 }
                 else
                 {
-                    selectedCell = cell;
                     selectedCell.SetSelected(false);
+                    selectedCell = cell;
                 }
             }
         }
