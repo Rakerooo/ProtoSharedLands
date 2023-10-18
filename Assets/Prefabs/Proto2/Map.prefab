@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   city: {fileID: 0}
-  prod: 5
+  prod: 3
   currentResourceStock: 16
   maxResourceStock: 16
   _UIController: {fileID: 0}
@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   city: {fileID: 0}
-  prod: 3
+  prod: 2
   currentResourceStock: 13
   maxResourceStock: 13
   _UIController: {fileID: 0}
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   city: {fileID: 0}
-  prod: 5
+  prod: 4
   currentResourceStock: 15
   maxResourceStock: 15
   _UIController: {fileID: 0}
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   city: {fileID: 0}
-  prod: 3
+  prod: 5
   currentResourceStock: 16
   maxResourceStock: 16
   _UIController: {fileID: 0}
