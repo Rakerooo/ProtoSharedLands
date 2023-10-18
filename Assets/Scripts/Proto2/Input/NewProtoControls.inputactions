@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "MainClick",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "8f151a2d-a6f4-49ca-812f-2b24dfba14b6",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -24,6 +24,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "MainClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "64fb454f-5efc-4c78-ad84-ce5820008083",
+            "actions": [
+                {
+                    "name": "Main Click",
+                    "type": "PassThrough",
+                    "id": "b9b11e6a-10cb-4127-8ad6-fc0e715d1099",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ac8c1bf7-dc66-4418-bbf9-33ab279b4e7c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Main Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
