@@ -42,6 +42,7 @@ namespace Proto2.Map
         {
             SetSelected(!selected);
             map.UpdateSelected(this);
+            if (selected) Region.UpdateResourceHandlerUI();
         }
         private void UpdateVisual()
         {
