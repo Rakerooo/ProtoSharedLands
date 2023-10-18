@@ -58,7 +58,7 @@ namespace Proto2.Map
         private void UpdateSelected()
         {
             SetSelected(!selected);
-            map.UpdateSelected(selected ? this : null);
+            map.UpdateSelected(this);
         }
         private void UpdateVisual()
         {
