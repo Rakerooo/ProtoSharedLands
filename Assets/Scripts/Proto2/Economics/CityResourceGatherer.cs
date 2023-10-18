@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CityResourceGatherer : MonoBehaviour
 {
-    private RegionResourceHandler _regionResourceHandler;
+    [SerializeField] private RegionResourceHandler _regionResourceHandler;
     private CityManager _cityManager;
     [SerializeField] private bool exploitationMode = false;
 
