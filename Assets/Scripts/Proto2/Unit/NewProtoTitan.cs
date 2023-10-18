@@ -4,16 +4,18 @@ namespace Proto2.Unit
 {
     public class NewProtoTitan : NewProtoUnit<NewProtoRegion>
     {
-        // Start is called before the first frame update
-        void Start()
+        public void StartTurn()
         {
-        
+            UpdateTargetPos();
+            StartCoroutine(MoveToTargetPos());
         }
 
-        // Update is called once per frame
-        void Update()
+        private void UpdateTargetPos()
         {
-        
+            if (finalTargetPos == currentPos)
+            {
+                
+            }
         }
     }
 }
