@@ -1,28 +1,18 @@
-using System.Collections.Generic;
 using Proto2.Input;
+using Proto2.PathFinding;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace Proto2.Map
 {
-    public class NewProtoCell : MonoBehaviour, INewProtoHoverable, INewProtoInteractable
+    public class NewProtoCell : NewProtoPathPoint<NewProtoCell>, INewProtoHoverable, INewProtoInteractable
     {
         [SerializeField] private DecalProjector decalProjector;
-        [SerializeField] private List<NewProtoCell> neighbours;
-        [SerializeField] private Transform node;
         [SerializeField] private NewProtoBiotopes biotope;
-        [SerializeField] private float movementFactor = 1f;
-
-        public List<NewProtoCell> Neighbours => neighbours;
-        public Transform Node => node;
+        
         public NewProtoBiotopes Biotope => biotope;
-        public float MovementFactor => movementFactor;
-        public float Distance { get; private set; }
-        public bool Added { get; private set; }
-        public NewProtoCell Parent { get; private set; }
-
+        
         private NewProtoMap map;
-
         private bool hovered, selected;
         
         private void Start()
@@ -41,18 +31,6 @@ namespace Proto2.Map
         {
             selected = isSelected;
             UpdateVisual();
-        }
-        public void SetDistance(float newDistance)
-        {
-            Distance = newDistance;
-        }
-        public void SetAdded(bool added)
-        {
-            Added = added;
-        }
-        public void SetParent(NewProtoCell parent)
-        {
-            Parent = parent;
         }
         
         private void UpdateSelected()

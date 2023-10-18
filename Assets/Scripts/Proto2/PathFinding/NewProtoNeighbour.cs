@@ -1,7 +1,8 @@
 using System;
+using Proto2.Map;
 using UnityEngine;
 
-namespace Proto2.Map
+namespace Proto2.PathFinding
 {
     [Serializable]
     public struct NewProtoNeighbour

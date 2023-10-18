@@ -26,7 +26,7 @@ namespace Proto2.Map
         private void SetSecondaryCell(NewProtoCell cell)
         {
             secondarySelectedCell = cell;
-            pathRenderer.SetLine(selectedCell.GetFullPath(secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
+            pathRenderer.SetLine(NewProtoPathFinding<NewProtoCell>.GetFullPath(selectedCell, secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
         }
         
         private void ResetSecondaryCell()
@@ -42,7 +42,7 @@ namespace Proto2.Map
             {
                 selectedCell = cell;
                 //selectedCell.PrintDijkstra(cells);
-                selectedCell.UpdatePathfinding(cells);
+                NewProtoPathFinding<NewProtoCell>.UpdatePathfinding(selectedCell, cells);
             }
             else
             {
