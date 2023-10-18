@@ -12,6 +12,7 @@ namespace Proto2.Map
         
         public NewProtoBiotopes Biotope => biotope;
         
+        public NewProtoRegion Region { get; private set; }
         private NewProtoMap map;
         private bool hovered, selected;
         
@@ -31,6 +32,10 @@ namespace Proto2.Map
         {
             selected = isSelected;
             UpdateVisual();
+        }
+        public void SetRegion(NewProtoRegion region)
+        {
+            Region = region;
         }
         
         private void UpdateSelected()
