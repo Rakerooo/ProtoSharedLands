@@ -5,6 +5,8 @@ namespace Proto2.Map
         Wasteland,
         Plain,
         Forest,
-        Mountain
+        Hill,
+        Mountain,
+        Lake
     }
 }
