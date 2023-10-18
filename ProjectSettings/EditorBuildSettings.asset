@@ -14,9 +14,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/RMR_HexagonalGridTests.unity
     guid: f43315f75d65d584a866ce3cc4d137d5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ProtoScene.unity
     guid: 01712c693b847a441bacf3d6a474894a
+  - enabled: 0
+    path: Assets/RSL/RSL_Scene/RSL_ScenePourYoan.unity
+    guid: 8411002698e7deb478e961037a3444a3
+  - enabled: 1
+    path: Assets/Scenes/Proto2/Proto2Scene.unity
+    guid: 9d98d6c0ce873f04d984b8720f087b18
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bac259f4c8e4c2149baa93ef719ce1ba,
       type: 2}
