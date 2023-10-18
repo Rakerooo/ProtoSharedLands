@@ -22,18 +22,6 @@ public class TurnManager : MonoBehaviour
             Destroy(gameObject);
         }
         instance = this;
-        startPlayerTurnEvent.AddListener(() =>
-        {
-            Debug.Log("Start player turn");
-        });
-        endPlayerTurnEvent.AddListener(() =>
-        {
-            Debug.Log("End player turn");
-        });
-        startTitanTurnEvent.AddListener(() =>
-        {
-            Debug.Log("Start titan turn");
-        });
         endTitanTurnEvent.AddListener(() =>
         {
             Debug.Log("End titan turn");
