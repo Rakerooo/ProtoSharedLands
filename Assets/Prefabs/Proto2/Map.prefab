@@ -234,6 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6867154165872748640}
   - component: {fileID: 1566148961471793055}
+  - component: {fileID: 4920728077671292240}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -279,6 +280,23 @@ MonoBehaviour:
   - {fileID: 5859731551012136524}
   - {fileID: 3233568300816805165}
   - {fileID: 7143613979523516600}
+--- !u!114 &4920728077671292240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861903707530863102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 5
+  currentResourceStock: 16
+  maxResourceStock: 16
+  _UIController: {fileID: 0}
 --- !u!1 &1008739310210893966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80368302324798640}
   - component: {fileID: 8965551887256033206}
+  - component: {fileID: 6772912277588061258}
   m_Layer: 0
   m_Name: Bleu
   m_TagString: Untagged
@@ -1186,6 +1205,23 @@ MonoBehaviour:
   cells:
   - {fileID: 9054145165862605215}
   - {fileID: 1296954350116302376}
+--- !u!114 &6772912277588061258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954238883170261641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 3
+  currentResourceStock: 13
+  maxResourceStock: 13
+  _UIController: {fileID: 0}
 --- !u!1 &6654522739401091446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7078605082661172309}
   - component: {fileID: 6063622205529465816}
+  - component: {fileID: 8366663867448178293}
   m_Layer: 0
   m_Name: Rouge
   m_TagString: Untagged
@@ -1302,6 +1339,23 @@ MonoBehaviour:
   cells:
   - {fileID: 8620611714404970013}
   - {fileID: 2057404634631456340}
+--- !u!114 &8366663867448178293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731597821247902587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 5
+  currentResourceStock: 15
+  maxResourceStock: 15
+  _UIController: {fileID: 0}
 --- !u!1 &7178493367238294493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4243949323005515968}
   - component: {fileID: 8720243438863907614}
+  - component: {fileID: 6751435940259569101}
   m_Layer: 0
   m_Name: Vert
   m_TagString: Untagged
@@ -1770,6 +1825,23 @@ MonoBehaviour:
   cells:
   - {fileID: 7867492855657003225}
   - {fileID: 3440426536575171156}
+--- !u!114 &6751435940259569101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8250445344476541829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e586fa5dd81dc4b47b9234d0d5457cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  city: {fileID: 0}
+  prod: 3
+  currentResourceStock: 16
+  maxResourceStock: 16
+  _UIController: {fileID: 0}
 --- !u!1 &8421472139378574597
 GameObject:
   m_ObjectHideFlags: 0
