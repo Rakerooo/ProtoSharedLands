@@ -7,7 +7,7 @@ namespace Proto2.Input
     public class NewProtoMouseHandler : MonoBehaviour
     {
         [SerializeField] private LayerMask hoverableMask;
-        [SerializeField] private UnityEngine.Camera cam;
+        [SerializeField] private Camera cam;
 
         private bool hasHover;
     

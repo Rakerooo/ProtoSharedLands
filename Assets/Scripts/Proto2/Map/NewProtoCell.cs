@@ -11,9 +11,8 @@ namespace Proto2.Map
         [SerializeField] private NewProtoBiotopes biotope;
         
         public NewProtoBiotopes Biotope => biotope;
-
+        
         private NewProtoMap map;
-
         private bool hovered, selected;
         
         private void Start()
