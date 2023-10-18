@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Proto2.Map
@@ -6,33 +7,52 @@ namespace Proto2.Map
     public class NewProtoMap : MonoBehaviour
     {
         [SerializeField] private NewProtoPathRenderer pathRenderer;
-        public int NbCells { get; private set; }
         private NewProtoCell selectedCell, secondarySelectedCell;
+        private List<NewProtoCell> cells;
 
         private void Start()
         {
-            var cells = FindObjectsOfType<NewProtoCell>();
-            NbCells = cells.Length;
+            cells = FindObjectsOfType<NewProtoCell>().ToList();
+            Debug.Log(cells.Count);
+            pathRenderer.SetLine(new List<Vector3>());
+        }
+        
+        private void ResetSecondaryCell()
+        {
+            if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
+            secondarySelectedCell = null;
         }
 
         public void UpdateSelected(NewProtoCell cell)
         {
-            if (cell == null)
+            if (cell == null || cell.Equals(selectedCell))
             {
                 pathRenderer.SetLine(new List<Vector3>());
-                return;
+                selectedCell = null;
+                ResetSecondaryCell();
             }
-            if (cell.Equals(selectedCell)) selectedCell = null;
             else
             {
-                if (selectedCell == null) selectedCell = cell;
+                if (selectedCell == null)
+                {
+                    selectedCell = cell;
+                    selectedCell.UpdatePathfinding(cells);
+                }
                 else
                 {
-                    if (secondarySelectedCell != null) secondarySelectedCell.SetSelected(false);
+                    ResetSecondaryCell();
                     secondarySelectedCell = cell;
-                    selectedCell.SetDistances();
-                    pathRenderer.SetLine(selectedCell.GetPathToOtherCell(cell));
+                    selectedCell.PrintDijkstra(cells);
+                    pathRenderer.SetLine(selectedCell.GetFullPath(secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
                 }
+            }
+        }
+
+        private void DebugDistances()
+        {
+            foreach (var cell in cells)
+            {
+                Debug.Log($"{cell.gameObject.name} : {cell.Distance}");
             }
         }
     }

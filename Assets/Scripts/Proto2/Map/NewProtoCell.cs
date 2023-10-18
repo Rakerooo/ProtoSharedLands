@@ -8,16 +8,18 @@ namespace Proto2.Map
     public class NewProtoCell : MonoBehaviour, INewProtoHoverable, INewProtoInteractable
     {
         [SerializeField] private MeshRenderer meshRenderer;
-        [SerializeField] private List<NewProtoNeighbour> neighbours;
+        [SerializeField] private List<NewProtoCell> neighbours;
         [SerializeField] private Transform node;
         [SerializeField] private NewProtoBiotopes biotope;
         [SerializeField] private float movementFactor = 1f;
 
-        public List<NewProtoNeighbour> Neighbours => neighbours;
+        public List<NewProtoCell> Neighbours => neighbours;
         public Transform Node => node;
         public NewProtoBiotopes Biotope => biotope;
         public float MovementFactor => movementFactor;
         public float Distance { get; private set; }
+        public bool Added { get; private set; }
+        public NewProtoCell Parent { get; private set; }
 
         private NewProtoMap map;
         private Material material;
@@ -36,7 +38,6 @@ namespace Proto2.Map
         private void SetHover(bool isHovered)
         {
             hovered = isHovered;
-            Debug.Log($"Is {gameObject.name} hovered : {hovered}");
             UpdateVisual();
         }
         public void SetSelected(bool isSelected)
@@ -47,6 +48,14 @@ namespace Proto2.Map
         public void SetDistance(float newDistance)
         {
             Distance = newDistance;
+        }
+        public void SetAdded(bool added)
+        {
+            Added = added;
+        }
+        public void SetParent(NewProtoCell parent)
+        {
+            Parent = parent;
         }
         
         private void UpdateSelected()
