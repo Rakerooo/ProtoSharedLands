@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Camera
+namespace CameraScripts
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private UnityEngine.Camera cam;
+        [SerializeField] private Camera cam;
         [SerializeField] private Transform rig;
         #region Movement attributes
             [Header("Movement attributes")] [Tooltip("WASD (Shift)")]
@@ -24,17 +24,17 @@ namespace Camera
             private Vector3 currentVelocity;
             private bool dragStartSet;
             
-            private float movementSpeed => Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
-            private Vector3 view => cam == null ? Vector3.zero : cam.ScreenToViewportPoint(Input.mousePosition) ;
-            private bool IsPanningLeft => view.x <= panningMarginWidth;
-            private bool IsPanningRight => view.x >= 1 - panningMarginWidth;
-            private bool IsPanningTop => view.y >= 1 - panningMarginHeight;
-            private bool IsPanningBottom => view.y <= panningMarginHeight;
+            private float MovementSpeed => Input.GetKey(KeyCode.LeftShift) ? fastSpeed : normalSpeed;
+            private Vector3 View => cam == null ? Vector3.zero : cam.ScreenToViewportPoint(Input.mousePosition) ;
+            private bool IsPanningLeft => View.x <= panningMarginWidth;
+            private bool IsPanningRight => View.x >= 1 - panningMarginWidth;
+            private bool IsPanningTop => View.y >= 1 - panningMarginHeight;
+            private bool IsPanningBottom => View.y <= panningMarginHeight;
 
-            private bool IsPanningTopLeft => view.x <= panningAngleWidth && view.y >= 1 - panningAngleHeight;
-            private bool IsPanningTopRight => view.x >= 1 - panningAngleWidth && view.y >= 1 - panningAngleHeight;
-            private bool IsPanningBottomLeft => view.x <= panningAngleWidth && view.y <= panningAngleHeight;
-            private bool IsPanningBottomRight => view.x >= 1 - panningAngleWidth && view.y <= panningAngleHeight;
+            private bool IsPanningTopLeft => View.x <= panningAngleWidth && View.y >= 1 - panningAngleHeight;
+            private bool IsPanningTopRight => View.x >= 1 - panningAngleWidth && View.y >= 1 - panningAngleHeight;
+            private bool IsPanningBottomLeft => View.x <= panningAngleWidth && View.y <= panningAngleHeight;
+            private bool IsPanningBottomRight => View.x >= 1 - panningAngleWidth && View.y <= panningAngleHeight;
         #endregion
         #region Rotation attributes
             [Header("Rotation attributes")] [Tooltip("QE")]
@@ -47,7 +47,7 @@ namespace Camera
             private Quaternion baseRotation;
             private bool rotatingL, rotatingR;
             private bool rotatingKeyboardL, rotatingKeyboardR, rotatingMouse;
-            private bool rotatingKeyboard => rotatingKeyboardL || rotatingKeyboardR;
+            private bool RotatingKeyboard => rotatingKeyboardL || rotatingKeyboardR;
         #endregion
         #region Zoom attributes
             [Header("Zoom attributes")] [Tooltip("RF")]
@@ -94,10 +94,10 @@ namespace Camera
                 // Movement
                 if (!dragStartSet && !rotatingMouse)
                 {
-                    if (IsPanningLeft || IsPanningTopLeft || IsPanningBottomLeft) newPosition += -rig.right * movementSpeed;
-                    if (IsPanningRight || IsPanningTopRight || IsPanningBottomRight) newPosition += rig.right * movementSpeed;
-                    if (IsPanningTop || IsPanningTopLeft || IsPanningTopRight) newPosition += rig.forward * movementSpeed;
-                    if (IsPanningBottom || IsPanningBottomLeft || IsPanningBottomRight) newPosition += -rig.forward * movementSpeed;
+                    if (IsPanningLeft || IsPanningTopLeft || IsPanningBottomLeft) newPosition += -rig.right * MovementSpeed;
+                    if (IsPanningRight || IsPanningTopRight || IsPanningBottomRight) newPosition += rig.right * MovementSpeed;
+                    if (IsPanningTop || IsPanningTopLeft || IsPanningTopRight) newPosition += rig.forward * MovementSpeed;
+                    if (IsPanningBottom || IsPanningBottomLeft || IsPanningBottomRight) newPosition += -rig.forward * MovementSpeed;
                 }
                 var range = Mathf.Lerp(minRange, maxRange, oldZoomAmount == 0 ? 1 : 1 - oldZoomAmount);
                 if (Input.GetMouseButtonDown(2))
@@ -146,7 +146,7 @@ namespace Camera
                 {
                     rotateStartPosition = Input.mousePosition;
                     newRotation = rig.rotation;
-                    if (!rotatingKeyboard) rotatingMouse = true;
+                    if (!RotatingKeyboard) rotatingMouse = true;
                 }
                 if (Input.GetMouseButton(1))
                 {
@@ -169,13 +169,13 @@ namespace Camera
             {
                 // Movement
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-                    newPosition += rig.forward * movementSpeed;
+                    newPosition += rig.forward * MovementSpeed;
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                    newPosition += -rig.right * movementSpeed;
+                    newPosition += -rig.right * MovementSpeed;
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-                    newPosition += -rig.forward * movementSpeed;
+                    newPosition += -rig.forward * MovementSpeed;
                 if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                    newPosition += rig.right * movementSpeed;
+                    newPosition += rig.right * MovementSpeed;
 
                 // Rotation
                 if (!rotatingMouse)
@@ -237,7 +237,7 @@ namespace Camera
                     break;
             }
 
-            if (rotatingMouse || rotatingKeyboard)
+            if (rotatingMouse || RotatingKeyboard)
             {
                 if (rotatingL)
                 {
@@ -250,7 +250,7 @@ namespace Camera
             }
 
             newRotation.eulerAngles = new Vector3(newRotation.eulerAngles.x, rotationY);
-            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime * (rotatingMouse || rotatingKeyboard ? 1 : cancelRotationMultiplier));
+            rig.rotation = Quaternion.Lerp(rig.rotation, newRotation, Time.deltaTime / rotationTime * (rotatingMouse || RotatingKeyboard ? 1 : cancelRotationMultiplier));
             
             // Zoom
             oldZoomAmount = Mathf.Lerp(oldZoomAmount, zoomAmount, Time.deltaTime / zoomTime);

@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Proto2.Map
+namespace Proto2.PathFinding
 {
     [RequireComponent(typeof(LineRenderer))]
     public class NewProtoPathRenderer : MonoBehaviour
@@ -17,6 +16,7 @@ namespace Proto2.Map
 
         private void OnValidate()
         {
+            if (lineRenderer == null) Awake();
             lineRenderer.endWidth = lineWidth;
             lineRenderer.startWidth = lineWidth;
         }

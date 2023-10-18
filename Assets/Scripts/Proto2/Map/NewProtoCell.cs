@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Proto2.Input;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Proto2.Map
 {
     public class NewProtoCell : MonoBehaviour, INewProtoHoverable, INewProtoInteractable
     {
-        [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private DecalProjector decalProjector;
         [SerializeField] private List<NewProtoCell> neighbours;
         [SerializeField] private Transform node;
         [SerializeField] private NewProtoBiotopes biotope;
@@ -22,14 +22,11 @@ namespace Proto2.Map
         public NewProtoCell Parent { get; private set; }
 
         private NewProtoMap map;
-        private Material material;
 
         private bool hovered, selected;
         
         private void Start()
         {
-            var thisMaterial = meshRenderer.material;
-            material = thisMaterial;
             map = FindObjectOfType<NewProtoMap>();
             
             UpdateVisual();
@@ -61,12 +58,11 @@ namespace Proto2.Map
         private void UpdateSelected()
         {
             SetSelected(!selected);
-            map.UpdateSelected(selected ? this : null);
+            map.UpdateSelected(this);
         }
         private void UpdateVisual()
         {
-            if (selected) material.color = Color.red;
-            else material.color = hovered ? Color.yellow : Color.green;
+            decalProjector.fadeFactor = selected ? map.CellSelectedOpacity : hovered ? map.CellHoveredOpacity : map.BaseCellOpacity;
         }
         
         #region Inputs

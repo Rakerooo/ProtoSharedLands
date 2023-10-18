@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Proto2.PathFinding;
 using UnityEngine;
 
 namespace Proto2.Map
@@ -7,14 +8,25 @@ namespace Proto2.Map
     public class NewProtoMap : MonoBehaviour
     {
         [SerializeField] private NewProtoPathRenderer pathRenderer;
+        [SerializeField] private float cellSelectedOpacity = 1f, cellHoveredOpacity = 0.3f, baseCellOpacity = 0.1f;
+
+        public float CellSelectedOpacity => cellSelectedOpacity;
+        public float CellHoveredOpacity=> cellHoveredOpacity;
+        public float BaseCellOpacity => baseCellOpacity;
+        
         private NewProtoCell selectedCell, secondarySelectedCell;
         private List<NewProtoCell> cells;
 
         private void Start()
         {
             cells = FindObjectsOfType<NewProtoCell>().ToList();
-            Debug.Log(cells.Count);
             pathRenderer.SetLine(new List<Vector3>());
+        }
+        
+        private void SetSecondaryCell(NewProtoCell cell)
+        {
+            secondarySelectedCell = cell;
+            pathRenderer.SetLine(selectedCell.GetFullPath(secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
         }
         
         private void ResetSecondaryCell()
@@ -25,34 +37,32 @@ namespace Proto2.Map
 
         public void UpdateSelected(NewProtoCell cell)
         {
-            if (cell == null || cell.Equals(selectedCell))
+            if (cell == null) return;
+            if (selectedCell == null)
             {
-                pathRenderer.SetLine(new List<Vector3>());
-                selectedCell = null;
-                ResetSecondaryCell();
+                selectedCell = cell;
+                //selectedCell.PrintDijkstra(cells);
+                selectedCell.UpdatePathfinding(cells);
             }
             else
             {
-                if (selectedCell == null)
+                if (cell.Equals(selectedCell))
                 {
-                    selectedCell = cell;
-                    selectedCell.UpdatePathfinding(cells);
+                    selectedCell = null;
+                    pathRenderer.SetLine(new List<Vector3>());
+                    ResetSecondaryCell();
+                }
+                else if (secondarySelectedCell == null) SetSecondaryCell(cell);
+                else if (cell.Equals(secondarySelectedCell))
+                {
+                    pathRenderer.SetLine(new List<Vector3>());
+                    ResetSecondaryCell();
                 }
                 else
                 {
                     ResetSecondaryCell();
-                    secondarySelectedCell = cell;
-                    selectedCell.PrintDijkstra(cells);
-                    pathRenderer.SetLine(selectedCell.GetFullPath(secondarySelectedCell, cells).Select(c => c.Node.position).ToList());
+                    SetSecondaryCell(cell);
                 }
-            }
-        }
-
-        private void DebugDistances()
-        {
-            foreach (var cell in cells)
-            {
-                Debug.Log($"{cell.gameObject.name} : {cell.Distance}");
             }
         }
     }
