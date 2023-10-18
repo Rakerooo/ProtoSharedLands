@@ -8,11 +8,13 @@ using UnityEngine.Serialization;
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager instance;
+    [SerializeField] private NewProto_UITopBarController _UIController;
     [SerializeField] private ushort currentTurn = 0;
     [SerializeField] private UnityEvent startPlayerTurnEvent;
     [SerializeField] private UnityEvent endPlayerTurnEvent;
     [SerializeField] private UnityEvent startTitanTurnEvent;
     [SerializeField] private UnityEvent endTitanTurnEvent;
+    
     private void Awake()
     {
         if (instance != null)
@@ -36,9 +38,15 @@ public class TurnManager : MonoBehaviour
         {
             Debug.Log("End titan turn");
             currentTurn++;
+            UpdateUI();
         });
     }
-    
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     public UnityEvent GetStartPlayerTurnEvent()
     {
         return startPlayerTurnEvent;
@@ -72,6 +80,11 @@ public class TurnManager : MonoBehaviour
     public void EndTitanTurn()
     {
         endTitanTurnEvent.Invoke();
+    }
+
+    public void UpdateUI()
+    {
+        _UIController.UpdateTurnCount(currentTurn);
     }
     
 }
