@@ -23,6 +23,11 @@ public class PlayerResourceManager : MonoBehaviour
         currentResourceValue += resource;
     }
 
+    public void RemoveResource(float resource)
+    {
+        currentResourceValue -= resource;
+    }
+
     public float GetCurrentResource()
     {
         return currentResourceValue;
