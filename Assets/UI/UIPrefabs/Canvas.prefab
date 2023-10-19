@@ -121,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cityUIController: {fileID: 6969567393492335459}
   _regionUIController: {fileID: 3698179294661081420}
+  isCityUiEnabled: 0
+  isRegionUiEnabled: 0
 --- !u!1001 &3776008038068707936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,6 +496,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 921912490083745789, guid: 3c395f7f0b426c145be65786db5f6fad,
+        type: 3}
+      propertyPath: group
+      value: 
+      objectReference: {fileID: 8684958393482204047}
     - target: {fileID: 2695044669796156205, guid: 3c395f7f0b426c145be65786db5f6fad,
         type: 3}
       propertyPath: m_Name
@@ -687,6 +694,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c3e126ccbff714a8f286e7244089a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &8684958393482204047 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5124800998901568830, guid: 3c395f7f0b426c145be65786db5f6fad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4582932689590781617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7764860665277198981
 PrefabInstance:
   m_ObjectHideFlags: 0
