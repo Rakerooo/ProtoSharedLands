@@ -55,8 +55,9 @@ namespace Proto2.PathFinding
             }
         }
         
-        public static List<T> GetFullPath<T1>(T1 baseCell, T1 targetedCell, IEnumerable<T1> cells) where T1 : T
+        public static List<T> GetFullPath<T1>(T1 baseCell, T1 targetedCell, List<T1> cells, bool updatePathFinding = false) where T1 : T
         {
+            if (updatePathFinding) UpdatePathfinding(baseCell, cells);
             foreach (var node in cells.Where(node => !node.Equals(baseCell) && node.Equals(targetedCell)))
             {
                 Path.Clear();
