@@ -7,10 +7,11 @@ using UnityEngine;
 public class RegionResourceHandler : MonoBehaviour
 {
     [SerializeField] private CityResourceGatherer city;
+    [SerializeField] private NewProto_UIRegionController _UIController;
     [SerializeField] private float prod;
     [SerializeField] private float currentResourceStock;
     [SerializeField] private float maxResourceStock;
-    [SerializeField] private NewProto_UIRegionController _UIController;
+    
     
     private void Awake()
     {
@@ -50,5 +51,26 @@ public class RegionResourceHandler : MonoBehaviour
     {
         _UIController.SetExploitationGain(ResourcesTypes.Ore,(int)prod);
         _UIController.UpdateExploitationRate(currentResourceStock/maxResourceStock);
+        if (city == null && UIManager.instance.IsCityUiEnabled())
+        {
+            UIManager.instance.DisableCityUI();
+        }
+        else if(city != null && !UIManager.instance.IsCityUiEnabled())
+        {
+            UIManager.instance.EnableCityUI();
+        }
+    }
+
+    public void RefillRegionResource(float refillAmount)
+    {
+        if (currentResourceStock + refillAmount >= maxResourceStock)
+        {
+            currentResourceStock = maxResourceStock;
+        }
+        else
+        {
+            currentResourceStock += refillAmount;
+        }
+        UpdateUI();
     }
 }
