@@ -8,6 +8,7 @@ namespace Proto2.PathFinding
     {
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private float lineWidth = 1f;
+        [SerializeField] private float lineAlpha0, lineAlpha25 = 0.5f, lineAlpha50 = 0.75f, lineAlpha100 = 1f;
         
         private void Awake()
         {
@@ -25,6 +26,20 @@ namespace Proto2.PathFinding
         {
             lineRenderer.positionCount = positions.Count;
             lineRenderer.SetPositions(positions.ToArray());
+
+            lineRenderer.colorGradient = new Gradient
+            {
+                colorKeys = new GradientColorKey[] { },
+                alphaKeys = new GradientAlphaKey[]
+                {
+                    new () { alpha = lineAlpha0, time = 0 },
+                    new () { alpha = lineAlpha25, time = 0.25f },
+                    new () { alpha = lineAlpha50, time = 0.5f },
+                    new () { alpha = lineAlpha100, time = 1f }
+                },
+                mode = GradientMode.Blend,
+                colorSpace = ColorSpace.Gamma
+            };
         }
     }
 }
