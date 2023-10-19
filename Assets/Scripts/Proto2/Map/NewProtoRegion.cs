@@ -9,7 +9,7 @@ namespace Proto2.Map
         [SerializeField] private List<NewProtoCell> cells;
         [SerializeField] private RegionResourceHandler resourceHandler;
 
-        public List<NewProtoCell> Cells => cells;
+        private List<NewProtoCell> Cells => cells;
 
         private void Start()
         {
@@ -19,6 +19,11 @@ namespace Proto2.Map
             }
         }
 
+        public void RefillRegion(float amount)
+        {
+            resourceHandler.RefillRegionResource(amount);
+        }
+        
         public void UpdateResourceHandlerUI()
         {
             resourceHandler.UpdateUI();

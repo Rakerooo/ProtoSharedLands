@@ -8,15 +8,15 @@ namespace Proto2.Input
     {
         [SerializeField] private LayerMask hoverableMask;
         [SerializeField] private Camera cam;
+        [SerializeField] private EventSystem eventSystem;
 
         private bool hasHover;
     
         private INewProtoHoverable currentHover;
         private GameObject lastGameObjectHovered;
-    
         private void Update()
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (eventSystem.IsPointerOverGameObject()) return;
             var ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             Physics.Raycast(ray, out var hit, Mathf.Infinity, hoverableMask);
             if (hit.collider) {
@@ -44,6 +44,7 @@ namespace Proto2.Input
         public void OnMainClick(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
+            if (eventSystem.IsPointerOverGameObject()) return;
             if (currentHover is INewProtoInteractable interactable) {
                 interactable.OnMainClick();
             }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +12,24 @@ namespace Proto2.Unit
         [SerializeField] private Transform rotator, body;
         [SerializeField] private float positionSpeed = 1f, rotationSpeed = 1f;
         [SerializeField] private T startPos;
-        protected NewProtoPathRenderer pathRenderer;
+        [SerializeField] protected NewProtoPathRenderer pathRenderer;
         protected T currentPos;
         protected T targetPos;
         protected T finalTargetPos;
         protected int pathIndex = 0;
-        protected List<T> path = new();
+        protected readonly List<T> path = new();
         protected List<T> possiblePositions = new();
 
         protected void Start()
         {
             currentPos = startPos;
             transform.position = currentPos.Node.transform.position;
-            pathRenderer = FindObjectOfType<NewProtoPathRenderer>();
             possiblePositions = FindObjectsOfType<T>().ToList();
         }
 
         private float rotationFactor, positionFactor;
         protected IEnumerator MoveToTargetPos()
         {
-            Debug.Log(targetPos.name);
-
             rotationFactor = 0f;
             rotator.LookAt(targetPos.Node);
             var baseRotation = body.rotation;
@@ -53,8 +51,12 @@ namespace Proto2.Unit
             rotator.position = body.position;
 
             currentPos = targetPos;
-            pathRenderer.SetLine(new List<Vector3>());
-            TurnManager.instance.EndTitanTurn();
+            MovementFinished();
+        }
+
+        protected virtual void MovementFinished()
+        {
+            throw new Exception();
         }
     }
 }

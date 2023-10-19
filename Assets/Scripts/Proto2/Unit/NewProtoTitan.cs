@@ -10,7 +10,7 @@ namespace Proto2.Unit
     public class NewProtoTitan : NewProtoUnit<NewProtoRegion>
     {
         private readonly List<NewProtoRegion> possibleTargets = new();
-        [SerializeField] protected float reloadRegion = 10f;
+        [SerializeField] protected float reloadRegionAmount = 10f;
 
         private new void Start()
         {
@@ -25,6 +25,9 @@ namespace Proto2.Unit
 
         private void UpdateTargetPos()
         {
+            if (currentPos == null) return;
+            currentPos.RefillRegion(reloadRegionAmount);
+            
             if (finalTargetPos == null || finalTargetPos.Equals(currentPos) || pathIndex >= path.Count)
             {
                 possibleTargets.Clear();
@@ -39,6 +42,12 @@ namespace Proto2.Unit
             pathRenderer.SetLine(path.Select(c => c.Node.position).ToList());
             targetPos = path[pathIndex];
             pathIndex++;
+        }
+        
+        protected override void MovementFinished()
+        {
+            pathRenderer.SetLine(new List<Vector3>());
+            TurnManager.instance.EndTitanTurn();
         }
     }
 }

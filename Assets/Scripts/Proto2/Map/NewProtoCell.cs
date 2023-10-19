@@ -41,18 +41,7 @@ namespace Proto2.Map
         private void UpdateSelected()
         {
             SetSelected(!selected);
-            map.UpdateSelected(this);
-            if (selected)
-            {
-                UIManager.instance.EnableRegionUI();
-                UIManager.instance.SetCurrentSelectedCell(this);
-                Region.UpdateResourceHandlerUI();
-            }
-            else
-            {
-                UIManager.instance.DisableRegionUI();
-                UIManager.instance.DeselectCell();
-            }
+            map.UpdateCellSelected(this);
         }
         private void UpdateVisual()
         {
