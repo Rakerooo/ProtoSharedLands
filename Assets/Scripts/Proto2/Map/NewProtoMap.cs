@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Proto2.PathFinding;
+using Proto2.Unit;
 using UnityEngine;
 
 namespace Proto2.Map
@@ -14,7 +15,8 @@ namespace Proto2.Map
         public float CellHoveredOpacity=> cellHoveredOpacity;
         public float BaseCellOpacity => baseCellOpacity;
         
-        private NewProtoCell selectedCell, secondarySelectedCell;
+        private NewProtoCell selectedCell;
+        private NewProtoHero selectedHero;
         private List<NewProtoCell> cells;
 
         private void Start()
@@ -23,7 +25,28 @@ namespace Proto2.Map
             pathRenderer.SetLine(new List<Vector3>());
         }
 
-        public void UpdateSelected(NewProtoCell cell)
+        public void UpdateHeroSelected(NewProtoHero hero)
+        {
+            if (hero == null) return;
+            if (selectedHero == null)
+            {
+                selectedHero = hero;
+            }
+            else
+            {
+                if (hero.Equals(selectedHero))
+                {
+                    selectedHero = null;
+                }
+                else
+                {
+                    selectedHero.SetSelected(false);
+                    selectedHero = hero;
+                }
+            }
+        }
+        
+        public void UpdateCellSelected(NewProtoCell cell)
         {
             if (cell == null) return;
             if (selectedCell == null)

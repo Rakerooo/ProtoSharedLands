@@ -10,7 +10,7 @@ namespace Proto2.Unit
     public class NewProtoTitan : NewProtoUnit<NewProtoRegion>
     {
         private readonly List<NewProtoRegion> possibleTargets = new();
-        [SerializeField] protected float reloadRegion = 10f;
+        [SerializeField] protected float reloadRegionAmount = 10f;
 
         private new void Start()
         {
@@ -25,6 +25,9 @@ namespace Proto2.Unit
 
         private void UpdateTargetPos()
         {
+            if (currentPos == null) return;
+            currentPos.RefillRegion(reloadRegionAmount);
+            
             if (finalTargetPos == null || finalTargetPos.Equals(currentPos) || pathIndex >= path.Count)
             {
                 possibleTargets.Clear();

@@ -16,7 +16,7 @@ namespace Proto2.Unit
         protected T targetPos;
         protected T finalTargetPos;
         protected int pathIndex = 0;
-        protected List<T> path = new();
+        protected readonly List<T> path = new();
         protected List<T> possiblePositions = new();
 
         protected void Start()
@@ -30,8 +30,6 @@ namespace Proto2.Unit
         private float rotationFactor, positionFactor;
         protected IEnumerator MoveToTargetPos()
         {
-            Debug.Log(targetPos.name);
-
             rotationFactor = 0f;
             rotator.LookAt(targetPos.Node);
             var baseRotation = body.rotation;
