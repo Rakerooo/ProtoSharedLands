@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class NewProto_UIRegionController : MonoBehaviour
 {
+    [SerializeField] CanvasGroup group;
     [Header("Region Name")]
     [SerializeField] TMP_Text regionName;
 
@@ -25,6 +26,51 @@ public class NewProto_UIRegionController : MonoBehaviour
     public void SetRegionName(string regionName)
     {
         this.regionName.text = regionName;
+    }
+    
+    public void ToggleWindow(bool toggle)
+    {
+        StopAllCoroutines();
+
+        if (toggle)
+            StartCoroutine(ShowWindowRoutine());
+
+        else
+            StartCoroutine(HideWindowRoutine());
+    }
+    
+    public IEnumerator ShowWindowRoutine()
+    {
+        var wait = new WaitForSeconds(.05f);
+
+        float counter = 0f;
+        float delta = 0.3f;
+
+        group.alpha = 0f;
+
+        while(counter <= 1f)
+        {
+            counter += delta;
+            group.alpha = counter;
+            yield return wait;
+        }
+    }
+
+    public IEnumerator HideWindowRoutine()
+    {
+        var wait = new WaitForSeconds(.05f);
+
+        float counter = 1f;
+        float delta = 0.3f;
+
+        group.alpha = 0f;
+
+        while(counter >= 0f)
+        {
+            counter -= delta;
+            group.alpha = counter;
+            yield return wait;
+        }
     }
 
     public void HardExploitToggle(bool value)
