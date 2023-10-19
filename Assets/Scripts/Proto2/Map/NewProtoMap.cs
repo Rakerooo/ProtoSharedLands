@@ -39,7 +39,9 @@ namespace Proto2.Map
             selectedCell = cell;
             EnableRegionUI(selectedCell);
 
-            if (selectedHero != null) selectedHero.SetTarget(selectedCell);
+            if (selectedHero == null) return;
+            selectedHero.SetTarget(selectedCell);
+            DeselectedHero();
         }
         private void DeselectedCell()
         {

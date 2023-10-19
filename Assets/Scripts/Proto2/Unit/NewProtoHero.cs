@@ -73,7 +73,7 @@ namespace Proto2.Unit
 
         public void StartTurn()
         {
-            if (hasMoved)
+            if (hasMoved || targetPos == null)
             {
                 hasMoved = false;
                 startTitanTurn = true;
