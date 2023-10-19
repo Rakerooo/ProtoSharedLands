@@ -12,7 +12,6 @@ public class RegionResourceHandler : MonoBehaviour
     [SerializeField] private float currentResourceStock;
     [SerializeField] private float maxResourceStock;
     
-    
     private void Awake()
     {
         if (city != null)
