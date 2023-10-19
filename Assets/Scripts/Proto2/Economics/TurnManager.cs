@@ -26,25 +26,20 @@ public class TurnManager : MonoBehaviour
         instance = this;
         startPlayerTurnEvent.AddListener(() =>
         {
-            Debug.Log("Starting player turn");
             isPlayerTurn = true;
             UIManager.instance.EnableEndTurnButton();
         });
         endPlayerTurnEvent.AddListener(() =>
         {
-            Debug.Log("Ending player turn");
             isPlayerTurn = false;
             UIManager.instance.DisableEndTurnButton();
             startTitanTurnEvent.Invoke();
         });
         startTitanTurnEvent.AddListener(() =>
         {
-            Debug.Log("Starting titan turn");
-            endTitanTurnEvent.Invoke();
         });
         endTitanTurnEvent.AddListener(() =>
         {
-            Debug.Log("Ending titan turn");
             currentTurn++;
             UpdateUI();
             startPlayerTurnEvent.Invoke();
