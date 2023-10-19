@@ -33,7 +33,6 @@ public class TurnManager : MonoBehaviour
         {
             isPlayerTurn = false;
             UIManager.instance.DisableEndTurnButton();
-            startTitanTurnEvent.Invoke();
         });
         startTitanTurnEvent.AddListener(() =>
         {

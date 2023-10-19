@@ -9,9 +9,8 @@ namespace Proto2.Unit
     public class NewProtoHero : NewProtoUnit<NewProtoCell>
     {
         [SerializeField] private MeshRenderer meshRenderer;
-        [SerializeField] private bool startTitanTurn;
-        [SerializeField] private bool hasMoved;
-
+        
+        private bool startTitanTurn, hasMoved;
         private NewProtoMap map;
         private Material material;
         private bool hovered, selected;
@@ -74,10 +73,18 @@ namespace Proto2.Unit
 
         public void StartTurn()
         {
-            hasMoved = false;
-            UpdateTargetPos();
-            StartCoroutine(MoveToTargetPos());
-            startTitanTurn = true;
+            if (hasMoved)
+            {
+                hasMoved = false;
+                startTitanTurn = true;
+                MovementFinished();
+            }
+            else
+            {
+                UpdateTargetPos();
+                StartCoroutine(MoveToTargetPos());
+                startTitanTurn = true;
+            }
         }
         protected override void MovementFinished()
         {
