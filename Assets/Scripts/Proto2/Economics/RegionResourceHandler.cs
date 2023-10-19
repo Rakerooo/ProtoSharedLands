@@ -39,6 +39,7 @@ public class RegionResourceHandler : MonoBehaviour
         if (stockToRemove >= currentResourceStock)
         {
             currentResourceStock = 0;
+            _UIController.SetRegionName("Wasteland");
         }
         else
         {
@@ -48,17 +49,18 @@ public class RegionResourceHandler : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (UIManager.instance.GetCell()?.Region.GetResourceHandler() == this)
+        if (UIManager.instance.GetCurrentCell()?.Region.GetResourceHandler() == this)
         {
             _UIController.SetExploitationGain(ResourcesTypes.Ore, (int)prod);
             _UIController.UpdateExploitationRate(currentResourceStock / maxResourceStock);
         }
 
-        if (city == null && UIManager.instance.IsCityUiEnabled())
+        if (city == null && UIManager.instance.IsCityUiEnabled() && UIManager.instance.GetCurrentCell()?.Region.GetResourceHandler() == this)
         {
+            Debug.Log("Là");
             UIManager.instance.DisableCityUI();
         }
-        else if(city != null && !UIManager.instance.IsCityUiEnabled())
+        else if(city != null && !UIManager.instance.IsCityUiEnabled() && UIManager.instance.GetCurrentCell()?.Region.GetResourceHandler() == this)
         {
             UIManager.instance.EnableCityUI();
         }
