@@ -14,6 +14,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private UnityEvent endPlayerTurnEvent;
     [SerializeField] private UnityEvent startTitanTurnEvent;
     [SerializeField] private UnityEvent endTitanTurnEvent;
+
+    [SerializeField] private bool isPlayerTurn = true;
     
     private void Awake()
     {
@@ -22,10 +24,30 @@ public class TurnManager : MonoBehaviour
             Destroy(gameObject);
         }
         instance = this;
+        startPlayerTurnEvent.AddListener(() =>
+        {
+            Debug.Log("Starting player turn");
+            isPlayerTurn = true;
+            UIManager.instance.EnableEndTurnButton();
+        });
+        endPlayerTurnEvent.AddListener(() =>
+        {
+            Debug.Log("Ending player turn");
+            isPlayerTurn = false;
+            UIManager.instance.DisableEndTurnButton();
+            startTitanTurnEvent.Invoke();
+        });
+        startTitanTurnEvent.AddListener(() =>
+        {
+            Debug.Log("Starting titan turn");
+            endTitanTurnEvent.Invoke();
+        });
         endTitanTurnEvent.AddListener(() =>
         {
+            Debug.Log("Ending titan turn");
             currentTurn++;
             UpdateUI();
+            startPlayerTurnEvent.Invoke();
         });
     }
 
@@ -57,7 +79,10 @@ public class TurnManager : MonoBehaviour
     }
     public void EndPlayerTurn()
     {
-        endPlayerTurnEvent.Invoke();
+        if (isPlayerTurn)
+        {
+            endPlayerTurnEvent.Invoke();
+        }
     }
     public void StartTitanTurn()
     {
@@ -71,6 +96,11 @@ public class TurnManager : MonoBehaviour
     public void UpdateUI()
     {
         _UIController.UpdateTurnCount(currentTurn);
+    }
+
+    public bool IsPlayerTurn()
+    {
+        return isPlayerTurn;
     }
     
 }

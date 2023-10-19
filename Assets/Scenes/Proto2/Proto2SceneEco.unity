@@ -697,6 +697,51 @@ PrefabInstance:
       propertyPath: _UIController
       value: 
       objectReference: {fileID: 981751348}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endTitanTurnEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: startTitanTurnEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 559689569}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartTitanTurn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458539384145606214, guid: 90d3699c4f59a1849a873934e6ef3a43,
+        type: 3}
+      propertyPath: endPlayerTurnEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4874095768149012000, guid: 90d3699c4f59a1849a873934e6ef3a43,
         type: 3}
       propertyPath: m_Name
@@ -1176,6 +1221,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 559689569}
+    - target: {fileID: 4640645292573506296, guid: 7dd506a5e40aef048aaaba898618d16a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndPlayerTurn
+      objectReference: {fileID: 0}
     - target: {fileID: 5519444771670514948, guid: 7dd506a5e40aef048aaaba898618d16a,
         type: 3}
       propertyPath: m_AnchorMax.y

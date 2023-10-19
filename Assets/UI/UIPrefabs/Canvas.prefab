@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cityUIController: {fileID: 6969567393492335459}
   _regionUIController: {fileID: 3698179294661081420}
+  endTurnButton: {fileID: 4640645292573506296}
   isCityUiEnabled: 0
   isRegionUiEnabled: 0
 --- !u!1001 &3776008038068707936
@@ -276,6 +277,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb35c736e0535b4ab8597744645603c, type: 3}
+--- !u!114 &4640645292573506296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8359227380752210072, guid: 8cb35c736e0535b4ab8597744645603c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3776008038068707936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9193864347820178909 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5471936924713869245, guid: 8cb35c736e0535b4ab8597744645603c,

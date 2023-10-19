@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using Proto2.Map;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     [SerializeField] private NewProto_UITownController _cityUIController;
     [SerializeField] private NewProto_UIRegionController _regionUIController;
+    [SerializeField] private Button endTurnButton;
     [SerializeField] private bool isCityUiEnabled;
     [SerializeField] private bool isRegionUiEnabled;
 
@@ -69,5 +71,14 @@ public class UIManager : MonoBehaviour
     public void DeselectCell()
     {
         currentSelectCell = null;
+    }
+
+    public void EnableEndTurnButton()
+    {
+        endTurnButton.gameObject.SetActive(true);
+    }
+    public void DisableEndTurnButton()
+    {
+        endTurnButton.gameObject.SetActive(false);
     }
 }
