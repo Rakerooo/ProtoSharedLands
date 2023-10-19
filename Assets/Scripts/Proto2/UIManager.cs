@@ -78,6 +78,11 @@ public class UIManager : MonoBehaviour
         currentSelectCell = null;
     }
 
+    public NewProtoCell GetCell()
+    {
+        return currentSelectCell;
+    }
+
     public void EnableEndTurnButton()
     {
         endTurnButton.gameObject.SetActive(true);

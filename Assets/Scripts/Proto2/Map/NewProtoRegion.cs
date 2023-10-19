@@ -28,5 +28,10 @@ namespace Proto2.Map
         {
             resourceHandler.UpdateUI();
         }
+
+        public RegionResourceHandler GetResourceHandler()
+        {
+            return resourceHandler;
+        }
     }
 }

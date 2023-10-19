@@ -48,8 +48,12 @@ public class RegionResourceHandler : MonoBehaviour
 
     public void UpdateUI()
     {
-        _UIController.SetExploitationGain(ResourcesTypes.Ore,(int)prod);
-        _UIController.UpdateExploitationRate(currentResourceStock/maxResourceStock);
+        if (UIManager.instance.GetCell()?.Region.GetResourceHandler() == this)
+        {
+            _UIController.SetExploitationGain(ResourcesTypes.Ore, (int)prod);
+            _UIController.UpdateExploitationRate(currentResourceStock / maxResourceStock);
+        }
+
         if (city == null && UIManager.instance.IsCityUiEnabled())
         {
             UIManager.instance.DisableCityUI();
@@ -62,14 +66,18 @@ public class RegionResourceHandler : MonoBehaviour
 
     public void RefillRegionResource(float refillAmount)
     {
-        if (currentResourceStock + refillAmount >= maxResourceStock)
+        if (currentResourceStock > 0)
         {
-            currentResourceStock = maxResourceStock;
+            if (currentResourceStock + refillAmount >= maxResourceStock)
+            {
+                currentResourceStock = maxResourceStock;
+            }
+            else
+            {
+                currentResourceStock += refillAmount;
+            }
+
+            UpdateUI();
         }
-        else
-        {
-            currentResourceStock += refillAmount;
-        }
-        UpdateUI();
     }
 }
