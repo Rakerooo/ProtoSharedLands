@@ -19,6 +19,35 @@ namespace Proto2.Map
         private NewProtoHero selectedHero;
         private List<NewProtoCell> cells;
 
+        private void SetSelectedHero(NewProtoHero hero)
+        {
+            if (selectedHero != null) selectedHero.SetSelected(false);
+            selectedHero = hero;
+
+            if (selectedCell == null) return;
+            DeselectedCell();
+        }
+        private void DeselectedHero()
+        {
+            selectedHero.SetSelected(false);
+            selectedHero = null;
+        }
+        
+        private void SetSelectedCell(NewProtoCell cell)
+        {
+            if (selectedCell != null) selectedCell.SetSelected(false);
+            selectedCell = cell;
+            EnableRegionUI(selectedCell);
+
+            if (selectedHero != null) selectedHero.SetTarget(selectedCell);
+        }
+        private void DeselectedCell()
+        {
+            selectedCell.SetSelected(false);
+            selectedCell = null;
+            DisableRegionUI();
+        }
+        
         private void Start()
         {
             cells = FindObjectsOfType<NewProtoCell>().ToList();
@@ -28,46 +57,36 @@ namespace Proto2.Map
         public void UpdateHeroSelected(NewProtoHero hero)
         {
             if (hero == null) return;
-            if (selectedHero == null)
-            {
-                selectedHero = hero;
-            }
+            if (selectedHero == null) SetSelectedHero(hero);
             else
             {
-                if (hero.Equals(selectedHero))
-                {
-                    selectedHero = null;
-                }
-                else
-                {
-                    selectedHero.SetSelected(false);
-                    selectedHero = hero;
-                }
+                if (hero.Equals(selectedHero)) DeselectedHero();
+                else SetSelectedHero(hero);
             }
         }
         
         public void UpdateCellSelected(NewProtoCell cell)
         {
             if (cell == null) return;
-            if (selectedCell == null)
-            {
-                selectedCell = cell;
-                //selectedCell.PrintDijkstra(cells);
-                NewProtoPathFinding<NewProtoCell>.UpdatePathfinding(selectedCell, cells);
-            }
+            if (selectedCell == null) SetSelectedCell(cell);
             else
             {
-                if (cell.Equals(selectedCell))
-                {
-                    selectedCell = null;
-                    pathRenderer.SetLine(new List<Vector3>());
-                }
-                else
-                {
-                    selectedCell.SetSelected(false);
-                    selectedCell = cell;
-                }
+                if (cell.Equals(selectedCell)) DeselectedCell();
+                else SetSelectedCell(cell);
             }
+        }
+
+        private static void EnableRegionUI(NewProtoCell cell)
+        {
+            UIManager.instance.EnableRegionUI();
+            UIManager.instance.SetCurrentSelectedCell(cell);
+            cell.Region.UpdateResourceHandlerUI();
+        }
+        
+        private static void DisableRegionUI()
+        {
+            UIManager.instance.DisableRegionUI();
+            UIManager.instance.DeselectCell();
         }
         
         /*private void SetSecondaryCell(NewProtoCell cell)

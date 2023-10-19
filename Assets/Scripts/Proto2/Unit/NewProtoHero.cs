@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using Proto2.Map;
+using Proto2.PathFinding;
 using UnityEngine;
 
 namespace Proto2.Unit
@@ -6,6 +9,8 @@ namespace Proto2.Unit
     public class NewProtoHero : NewProtoUnit<NewProtoCell>
     {
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private bool startTitanTurn;
+        [SerializeField] private bool hasMoved;
 
         private NewProtoMap map;
         private Material material;
@@ -20,6 +25,28 @@ namespace Proto2.Unit
         {
             selected = isSelected;
             UpdateVisual();
+        }
+        public void SetTarget(NewProtoCell cell)
+        {
+            finalTargetPos = cell;
+            path.Clear();
+            path.AddRange(NewProtoPathFinding<NewProtoCell>.GetFullPath(currentPos, finalTargetPos, possiblePositions, true));
+            pathRenderer.SetLine(path.Select(c => c.Node.position).ToList());
+            pathIndex = 0;
+            pathIndex++;
+            
+            if (hasMoved) return;
+            hasMoved = true;
+            UpdateTargetPos();
+            StartCoroutine(MoveToTargetPos());
+        }
+        
+        private void UpdateTargetPos()
+        {
+            if (currentPos == null) return;
+            if (finalTargetPos == null || finalTargetPos.Equals(currentPos) || pathIndex >= path.Count) return;
+            targetPos = path[pathIndex];
+            pathIndex++;
         }
         
         private new void Start()
@@ -44,17 +71,32 @@ namespace Proto2.Unit
             if (selected) material.color = Color.red;
             else material.color = hovered ? Color.yellow : Color.green;
         }
+
+        public void StartTurn()
+        {
+            hasMoved = false;
+            UpdateTargetPos();
+            StartCoroutine(MoveToTargetPos());
+            startTitanTurn = true;
+        }
+        protected override void MovementFinished()
+        {
+            if (startTitanTurn)
+            {
+                TurnManager.instance.StartTitanTurn();
+                startTitanTurn = false;
+            }
+            if (finalTargetPos == currentPos) pathRenderer.SetLine(new List<Vector3>());
+        }
         
         public void OnHoverEnable()
         {
             SetHover(true);
         }
-
         public void OnHoverDisable()
         {
             SetHover(false);
         }
-
         public void OnMainClick()
         {
             UpdateSelected();

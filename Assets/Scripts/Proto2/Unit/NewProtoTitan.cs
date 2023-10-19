@@ -43,5 +43,11 @@ namespace Proto2.Unit
             targetPos = path[pathIndex];
             pathIndex++;
         }
+        
+        protected override void MovementFinished()
+        {
+            pathRenderer.SetLine(new List<Vector3>());
+            TurnManager.instance.EndTitanTurn();
+        }
     }
 }
