@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Proto2.PathFinding;
 using Proto2.Unit;
 using UnityEngine;
 
@@ -8,7 +5,6 @@ namespace Proto2.Map
 {
     public class NewProtoMap : MonoBehaviour
     {
-        [SerializeField] private NewProtoPathRenderer pathRenderer;
         [SerializeField] private float cellSelectedOpacity = 1f, cellHoveredOpacity = 0.3f, baseCellOpacity = 0.1f;
 
         public float CellSelectedOpacity => cellSelectedOpacity;
@@ -17,7 +13,6 @@ namespace Proto2.Map
         
         private NewProtoCell selectedCell;
         private NewProtoHero selectedHero;
-        private List<NewProtoCell> cells;
 
         private void SetSelectedHero(NewProtoHero hero)
         {
@@ -48,12 +43,6 @@ namespace Proto2.Map
             selectedCell.SetSelected(false);
             selectedCell = null;
             DisableRegionUI();
-        }
-        
-        private void Start()
-        {
-            cells = FindObjectsOfType<NewProtoCell>().ToList();
-            pathRenderer.SetLine(new List<Vector3>());
         }
 
         public void UpdateHeroSelected(NewProtoHero hero)

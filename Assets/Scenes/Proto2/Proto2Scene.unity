@@ -2424,3 +2424,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   cam: {fileID: 2018032850}
+  eventSystem: {fileID: 5555027007756838253}
