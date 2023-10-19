@@ -30,12 +30,15 @@ public class UIManager : MonoBehaviour
     public void DisableCityUI()
     {
         if (!isCityUiEnabled) return;
+        
         _cityUIController.ToggleWindow(false);
         isCityUiEnabled = false;
+        _cityUIController.gameObject.SetActive(false);
     }
     public void EnableCityUI()
     {
         if (isCityUiEnabled) return;
+        _cityUIController.gameObject.SetActive(true);
         _cityUIController.ToggleWindow(true);
         isCityUiEnabled = true;
 
@@ -46,10 +49,12 @@ public class UIManager : MonoBehaviour
         _regionUIController.ToggleWindow(false);
         isRegionUiEnabled = false;
         DisableCityUI();
+        _regionUIController.gameObject.SetActive(false);
     }
     public void EnableRegionUI()
     {
         if (isRegionUiEnabled) return;
+        _regionUIController.gameObject.SetActive(true);
         _regionUIController.ToggleWindow(true);
         isRegionUiEnabled = true;
     }
