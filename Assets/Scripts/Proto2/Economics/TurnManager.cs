@@ -24,7 +24,6 @@ public class TurnManager : MonoBehaviour
         instance = this;
         endTitanTurnEvent.AddListener(() =>
         {
-            Debug.Log("End titan turn");
             currentTurn++;
             UpdateUI();
         });
@@ -52,7 +51,6 @@ public class TurnManager : MonoBehaviour
         return endTitanTurnEvent;
     }
     
-    [ContextMenu("Start Turn")]
     public void StartPlayerTurn()
     {
         startPlayerTurnEvent.Invoke();

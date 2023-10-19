@@ -41,13 +41,7 @@ public class NewProto_UITownController : MonoBehaviour
 
     [Space(10f)]
     public UnityEvent onPlusbatiment;
-
-    private void Start()
-    {
-        ToggleWindow(true);
-    }
     
-
     public void SetTownName(string TownName)
     {
         nameField.text = TownName;
@@ -134,7 +128,7 @@ public class NewProto_UITownController : MonoBehaviour
         var wait = new WaitForSeconds(.05f);
 
         float counter = 0f;
-        float delta = 0.05f;
+        float delta = 0.3f;
 
         group.alpha = 0f;
 
@@ -151,7 +145,7 @@ public class NewProto_UITownController : MonoBehaviour
         var wait = new WaitForSeconds(.05f);
 
         float counter = 1f;
-        float delta = 0.05f;
+        float delta = 0.3f;
 
         group.alpha = 0f;
 
