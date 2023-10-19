@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
         if (!isRegionUiEnabled) return;
         _regionUIController.ToggleWindow(false);
         isRegionUiEnabled = false;
+        
         DisableCityUI();
         _regionUIController.gameObject.SetActive(false);
     }
@@ -78,7 +79,7 @@ public class UIManager : MonoBehaviour
         currentSelectCell = null;
     }
 
-    public NewProtoCell GetCell()
+    public NewProtoCell GetCurrentCell()
     {
         return currentSelectCell;
     }
