@@ -31,23 +31,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoTexture1:
-        m_Texture: {fileID: 2800000, guid: 8e255f57d15705e488d4db5425239501, type: 3}
+        m_Texture: {fileID: 2800000, guid: bd7d0d213a99c4b45ab6bc5789ca5f6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoTexture2:
-        m_Texture: {fileID: 2800000, guid: 5f61aa5f60d405a4b9f08becbe25d4c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0aa669cebc2fc5c4cb95e19b4bab6ecc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoTexture3:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8b7ccc5056a9bfc448e8c9f164610972, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex_Normal_01:
-        m_Texture: {fileID: 2800000, guid: 297a3ddfc901318499e15b3a0c8ec74d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d1a91da624cbe3419894ef66da10da7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex_Normal_02:
-        m_Texture: {fileID: 2800000, guid: 28b218fb0e12c994d8f0b586f65545f2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 41119268022d38c41b7fea0f78e612e0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex_Normal_03:
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex_Smoothness_01:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0c454ba922aedb9419fd6ed6875cb63c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex_Smoothness_02:
@@ -95,11 +95,11 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
-    - _InvertSmoothness_01: 0
+    - _InvertSmoothness_01: 1
     - _InvertSmoothness_02: 0
     - _InvertSmoothness_03: 0
-    - _Normal_Intensity_01: 1
-    - _Normal_Intensity_02: 0
+    - _Normal_Intensity_01: 0.5
+    - _Normal_Intensity_02: 1
     - _Normal_Intensity_03: 0
     - _OpaqueCullMode: 2
     - _QueueControl: 0
@@ -110,12 +110,12 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Saturation_01: 0
-    - _Saturation_02: 1
+    - _Saturation_01: 0.363
+    - _Saturation_02: 0
     - _Saturation_03: 1
-    - _Smoothness_Intensity_01: 0
-    - _Smoothness_Intensity_02: 1
-    - _Smoothness_Intensity_03: 1
+    - _Smoothness_Intensity_01: 0.7
+    - _Smoothness_Intensity_02: 0
+    - _Smoothness_Intensity_03: 0.378
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 8
@@ -147,7 +147,7 @@ Material:
     - _Offset_01: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_02: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_03: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling_01: {r: 10, g: 10, b: 0, a: 0}
+    - _Tiling_01: {r: 30, g: 30, b: 0, a: 0}
     - _Tiling_02: {r: 10, g: 10, b: 0, a: 0}
     - _Tiling_03: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
