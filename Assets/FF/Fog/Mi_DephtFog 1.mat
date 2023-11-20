@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: c9a3ce18ab99948419146627b435e740, type: 3}
+        m_Texture: {fileID: 2800000, guid: c872d43c67ff7734e9de6f84e09f82a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -61,20 +61,20 @@ Material:
     - _IsTexOn: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Strenght: 4
+    - _Strenght: 10
     - _TexIntensity: 0.38
     - _TexPow: 1
     - _Tex_Intensity: 0.432
     m_Colors:
     - _Color: {r: 0.2559237, g: 1, b: 0.02745098, a: 1}
-    - _ColorAndAlpha: {r: 0.6448024, g: 0.8490566, b: 0.8067971, a: 1}
+    - _ColorAndAlpha: {r: 1, g: 0, b: 0.6841278, a: 1}
     - _GradientSmoothstep: {r: 0, g: 1, b: 0, a: 0}
     - _GradientSmoothstep_Stp_reste_entre_0_et_1_je_peux_pas_mettre_de_slider: {r: 0.5,
         g: 1, b: 0, a: 0}
     - _Speed: {r: 0, g: -0.1, b: 0, a: 0}
     - _TexSmoothness: {r: 0, g: -3.11, b: 0, a: 0}
     - _TexSmoothstep: {r: 0, g: 1, b: 0, a: 0}
-    - _Tex_Smoothstep: {r: 0, g: 1, b: 0, a: 0}
+    - _Tex_Smoothstep: {r: 0.1, g: 1, b: 0, a: 0}
     - _Tex_Speed: {r: 0.05, g: 0.1, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
